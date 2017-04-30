@@ -200,7 +200,7 @@ public class Robot extends PhysicalActor implements Harmable {
 
 	public boolean testLOSTo(Vector2 trg) {
 		Vector2 cur = new Vector2(body.getPosition());
-		Vector2 delta = trg.sub(cur);
+		Vector2 delta = new Vector2(trg).sub(cur);
 		delta = delta.scl(0.3f / delta.len());
 
 		while (Math.abs(cur.x - trg.x) > 1 || Math.abs(cur.y - trg.y) > 1) {
