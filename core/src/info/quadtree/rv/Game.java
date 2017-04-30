@@ -145,7 +145,7 @@ public class Game implements KeyListener, MouseListener, ContactListener, GameIn
 			inventoryScreen = !inventoryScreen;
 		if (e.getKeyCode() == KeyEvent.VK_O)
 			objectiveScreen = !objectiveScreen;
-		if (e.getKeyCode() == KeyEvent.VK_F1)
+		if (e.getKeyCode() == KeyEvent.VK_F1 || e.getKeyCode() == KeyEvent.VK_H)
 			helpScreenUp = !helpScreenUp;
 	}
 

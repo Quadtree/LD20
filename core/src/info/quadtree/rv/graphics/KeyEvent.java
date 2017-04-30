@@ -11,6 +11,7 @@ public class KeyEvent {
 	public static int VK_D = Input.Keys.D;
 	public static int VK_ENTER = Input.Keys.ENTER;
 	public static int VK_F1 = Input.Keys.F1;
+	public static int VK_H = Input.Keys.H;
 	public static int VK_I = Input.Keys.I;
 	public static int VK_O = Input.Keys.O;
 	public static int VK_P = Input.Keys.P;
