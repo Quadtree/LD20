@@ -1,15 +1,14 @@
 package info.quadtree.rv;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Json;
 
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.graphics.SGF;
@@ -48,27 +47,32 @@ public class Map extends Actor {
 			boolean boxFilled[][] = new boolean[1024][1024];
 			permutation = new byte[1024][1024];
 
-			InputStream worldIn = null;
+			/*
+			 * InputStream worldIn = null;
+			 * 
+			 * worldIn = getClass().getResourceAsStream("/media/world.dat");
+			 * 
+			 * if (worldIn == null) worldIn = new
+			 * FileInputStream(".\\media\\world.dat");
+			 * 
+			 * ObjectInputStream in = new ObjectInputStream(worldIn); map =
+			 * (WorldData) in.readObject(); in.close();
+			 * 
+			 * InputStream npcsIn = null;
+			 * 
+			 * npcsIn = getClass().getResourceAsStream("/media/npcs.dat");
+			 * 
+			 * if (npcsIn == null) npcsIn = new
+			 * FileInputStream(".\\media\\npcs.dat");
+			 * 
+			 * in = new ObjectInputStream(npcsIn); npcsToCreate =
+			 * (ArrayList<NPCDesc>) in.readObject(); in.close();
+			 */
 
-			worldIn = getClass().getResourceAsStream("/media/world.dat");
+			Json j = new Json();
 
-			if (worldIn == null)
-				worldIn = new FileInputStream(".\\media\\world.dat");
-
-			ObjectInputStream in = new ObjectInputStream(worldIn);
-			map = (WorldData) in.readObject();
-			in.close();
-
-			InputStream npcsIn = null;
-
-			npcsIn = getClass().getResourceAsStream("/media/npcs.dat");
-
-			if (npcsIn == null)
-				npcsIn = new FileInputStream(".\\media\\npcs.dat");
-
-			in = new ObjectInputStream(npcsIn);
-			npcsToCreate = (ArrayList<NPCDesc>) in.readObject();
-			in.close();
+			map = j.fromJson(WorldData.class, Gdx.files.internal("world.json"));
+			npcsToCreate = j.fromJson(ArrayList.class, Gdx.files.internal("npcs.json"));
 
 			BodyDef bd = new BodyDef();
 			body = Game.s.physicsWorld.createBody(bd);

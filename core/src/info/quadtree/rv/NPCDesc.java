@@ -3,7 +3,21 @@ package info.quadtree.rv;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import info.quadtree.rv.actor.*;
+import info.quadtree.rv.actor.Actor;
+import info.quadtree.rv.actor.BasicEnemy;
+import info.quadtree.rv.actor.Beacon;
+import info.quadtree.rv.actor.BossEnemy;
+import info.quadtree.rv.actor.EliteEnemy;
+import info.quadtree.rv.actor.EvilShopkeeperRobot;
+import info.quadtree.rv.actor.FastEnemy;
+import info.quadtree.rv.actor.Mayor;
+import info.quadtree.rv.actor.MissileEnemy;
+import info.quadtree.rv.actor.PlotBarrier;
+import info.quadtree.rv.actor.ShieldEnemy;
+import info.quadtree.rv.actor.Shopkeeper2;
+import info.quadtree.rv.actor.Shopkeeper3;
+import info.quadtree.rv.actor.Tech;
+import info.quadtree.rv.actor.Villager;
 import info.quadtree.rv.graphics.SGF;
 
 public class NPCDesc implements Serializable {
@@ -20,6 +34,10 @@ public class NPCDesc implements Serializable {
 	public NPCType type;
 
 	public float x, y;
+
+	public NPCDesc() {
+
+	}
 
 	public NPCDesc(NPCType type, float x, float y) {
 		this.type = type;
@@ -75,8 +93,32 @@ public class NPCDesc implements Serializable {
 
 	}
 
+	public NPCType getType() {
+		return type;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
 	public void render() {
 		SGF.getInstance().renderImage("BaseA0032", x, y, 1, 1, 0, true);
 		SGF.getInstance().renderText(type.toString(), x, y, 255, 255, 255, true, 1);
+	}
+
+	public void setType(NPCType type) {
+		this.type = type;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public void setY(float y) {
+		this.y = y;
 	}
 }
