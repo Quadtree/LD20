@@ -1,4 +1,4 @@
-package info.quadtree.rv.vfx;
+package info.quadtree.rv;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;

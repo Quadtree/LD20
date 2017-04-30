@@ -1,6 +1,8 @@
 package info.quadtree.rv.actor;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
 
 import info.quadtree.rv.Dialog;
 import info.quadtree.rv.FinalCinematic;
@@ -47,26 +49,23 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 	}
 
 	protected void becomeDynamic() {
-		body.destroyShape(body.getShapeList());
+		this.destroyAllShapes();
 
-		CircleDef cd = new CircleDef();
-		cd.radius = 0.4f;
-		cd.density = 1;
+		CircleShape cd = new CircleShape();
+		cd.setRadius(0.4f);
 
-		body.createShape(cd);
+		body.createFixture(cd, 1);
 
-		body.setMassFromShapes();
-
-		FilterData fd = new FilterData();
+		Filter fd = new Filter();
 		fd.categoryBits = 1 << 3;
 		fd.maskBits = 0xffffffff;
 
-		body.getShapeList().setFilterData(fd);
+		this.setAllFilters(fd);
 
 		dynamic = true;
 		lookAtPlayer = false;
 
-		Game.s.player.getBody().applyImpulse(new Vector2(-40, 0), new Vector2());
+		Game.s.player.getBody().applyLinearImpulse(new Vector2(-40, 0), new Vector2(), true);
 	}
 
 	public void fireCannon() {
@@ -187,7 +186,7 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 			aimPoint.y = 520;
 			forward = true;
 
-			if (body.getPosition().sub(aimPoint).length() < 2) {
+			if (body.getPosition().sub(aimPoint).len() < 2) {
 				stage = 2;
 				forward = false;
 			}
@@ -195,7 +194,7 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 		if (stage >= 2) {
 			if (stage == 3 && testLOSTo(Game.s.player.getPosition())) {
 				aimPoint = Game.s.player.getPosition();
-				if (getPosition().sub(aimPoint).length() < 12)
+				if (getPosition().sub(aimPoint).len() < 12)
 					backward = true;
 				else
 					backward = false;
@@ -217,8 +216,12 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 		if (cannonCooldown > 0)
 			cannonCooldown--;
 
-		if (!Game.s.dialogUp && stage == 0)
-			body.setXForm(startPos, 0);
+		if (!Game.s.dialogUp && stage == 0) {
+			Vector2 pos = new Vector2(startPos);
+			pos.y = body.getPosition().y;
+
+			body.setTransform(startPos, body.getAngle());
+		}
 
 		if (spawnAdds) {
 			Game.s.actors.add(new FastEnemy(getPosition().x, getPosition().y));

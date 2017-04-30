@@ -3,6 +3,9 @@ package info.quadtree.rv.actor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Array;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.graphics.SGF;
@@ -46,6 +49,13 @@ public class Robot extends PhysicalActor implements Harmable {
 
 	protected void aim(Vector2 target) {
 		aimPoint = target;
+	}
+
+	void destroyAllShapes() {
+		Array<Fixture> fxs = body.getFixtureList();
+
+		for (Fixture f : fxs)
+			body.destroyFixture(f);
 	}
 
 	public float getAimFacing() {
@@ -158,6 +168,11 @@ public class Robot extends PhysicalActor implements Harmable {
 
 		if (shockImmune > 0)
 			shockImmune--;
+	}
+
+	void setAllFilters(Filter filter) {
+		for (Fixture f : body.getFixtureList())
+			f.setFilterData(filter);
 	}
 
 	public void setMuzzleBlastTimer(int muzzleBlastTimer) {

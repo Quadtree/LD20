@@ -10,7 +10,17 @@ public class EliteEnemy extends BasicEnemy {
 		super(x, y);
 		reset();
 	}
-	
+
+	@Override
+	public void notifyDestroyed() {
+		if (Game.s.rand.nextInt(4) == 0)
+			Game.s.actors.add(new BoltGun(body.getPosition().x, body.getPosition().y, false));
+
+		Game.s.player.modMoney(60);
+
+		super.notifyDestroyed();
+	}
+
 	@Override
 	public void reset() {
 		hp = 8;
@@ -18,17 +28,17 @@ public class EliteEnemy extends BasicEnemy {
 
 	@Override
 	public void update() {
-		
-		if(body.getPosition().sub(Game.s.player.getPosition()).lengthSquared() > 32*32) return;
-		
-		if(shotCooldown > 0) shotCooldown--;
-		
+
+		if (body.getPosition().sub(Game.s.player.getPosition()).len2() > 32 * 32)
+			return;
+
+		if (shotCooldown > 0)
+			shotCooldown--;
+
 		aim(Game.s.player.getPosition());
-		
-		if(testLOSTo(Game.s.player.getPosition()))
-		{
-			if(shotCooldown <= 0)
-			{
+
+		if (testLOSTo(Game.s.player.getPosition())) {
+			if (shotCooldown <= 0) {
 				setMuzzleBlastTimer(3);
 				shotCooldown = 20;
 				Game.s.actors.add(new Bolt(getPosition().x, getPosition().y, getAimFacing(), 4.5f, "evilshot", true, 1.f));
@@ -36,14 +46,5 @@ public class EliteEnemy extends BasicEnemy {
 			}
 		}
 		robotUpdate();
-	}
-	
-	@Override
-	public void notifyDestroyed() {
-		if(Game.s.rand.nextInt(4) == 0) Game.s.actors.add(new BoltGun(body.getPosition().x, body.getPosition().y, false));
-			
-		Game.s.player.modMoney(60);
-			
-		super.notifyDestroyed();
 	}
 }
