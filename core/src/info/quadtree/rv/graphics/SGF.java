@@ -12,12 +12,12 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 
 public class SGF {
-	class ToRender {
+	class QueuedImage {
 		String imgName;
 		public float rot;
 		public float x, y, w, h;
 
-		public ToRender(float x, float y, float w, float h, float rot, String imgName) {
+		public QueuedImage(float x, float y, float w, float h, float rot, String imgName) {
 			super();
 			this.x = x;
 			this.y = y;
@@ -25,6 +25,24 @@ public class SGF {
 			this.h = h;
 			this.rot = rot;
 			this.imgName = imgName;
+		}
+
+	}
+
+	class QueuedText {
+		public int fontSize;
+		public String text;
+		public float x, y, cr, cg, cb;
+
+		public QueuedText(String text, float x, float y, float cr, float cg, float cb, int fontSize) {
+			super();
+			this.text = text;
+			this.x = x;
+			this.y = y;
+			this.cr = cr;
+			this.cg = cg;
+			this.cb = cb;
+			this.fontSize = fontSize;
 		}
 
 	}
@@ -43,11 +61,14 @@ public class SGF {
 
 	long milisUpdated = 0;
 
-	Array<ToRender> normalRenderQueue = new Array<ToRender>();
+	Array<QueuedImage> normalRenderQueue = new Array<QueuedImage>();
+
+	Array<QueuedText> textRenderQueue = new Array<QueuedText>();
 
 	SpriteBatch uiBatch;
+	Array<QueuedImage> uiRenderQueue = new Array<QueuedImage>();
 
-	Array<ToRender> uiRenderQueue = new Array<ToRender>();
+	Array<QueuedText> uiTextRenderQueue = new Array<QueuedText>();
 
 	public void addKeyListener(KeyListener keyListener) {
 		// @todo: Implment
@@ -61,7 +82,7 @@ public class SGF {
 		// @todo: Implment
 	}
 
-	private void doDrawImage(ToRender toRender, boolean useCamera) {
+	private void doDrawImage(QueuedImage toRender, boolean useCamera) {
 		if (!loadedImages.containsKey(toRender.imgName))
 			loadedImages.put(toRender.imgName, new Texture(Gdx.files.internal(toRender.imgName + ".png")));
 
@@ -104,18 +125,18 @@ public class SGF {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		for (ToRender tr : normalRenderQueue)
+		for (QueuedImage tr : normalRenderQueue)
 			doDrawImage(tr, true);
 		batch.end();
 
 		uiBatch.begin();
-		for (ToRender tr : uiRenderQueue)
+		for (QueuedImage tr : uiRenderQueue)
 			doDrawImage(tr, false);
 		uiBatch.end();
 	}
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
-		ToRender tr = new ToRender(x, y, w, h, rot, imgName);
+		QueuedImage tr = new QueuedImage(x, y, w, h, rot, imgName);
 
 		if (useCamera)
 			normalRenderQueue.add(tr);
@@ -124,7 +145,12 @@ public class SGF {
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
+		QueuedText tr = new QueuedText(text, x, y, cr, cg, cb, fontSize);
 
+		if (useCamera)
+			textRenderQueue.add(tr);
+		else
+			uiTextRenderQueue.add(tr);
 	}
 
 	public Point2D screenToReal(Point2D pt) {
