@@ -1,4 +1,4 @@
-package rv.projectile;
+package info.quadtree.rv.projectile;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,9 +12,9 @@ import org.jbox2d.dynamics.ContactListener;
 import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
 
-import rv.Game;
-import rv.actor.Harmable;
-import rv.actor.PhysicalActor;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.actor.Harmable;
+import info.quadtree.rv.actor.PhysicalActor;
 import sgf.SGF;
 import sv.vfx.Spark;
 

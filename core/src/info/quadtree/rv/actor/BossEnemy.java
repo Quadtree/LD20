@@ -1,10 +1,10 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Game;
-import rv.item.Core;
-import rv.item.Turbo;
-import rv.item.VulcanCannon;
-import rv.projectile.Bolt;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.Core;
+import info.quadtree.rv.item.Turbo;
+import info.quadtree.rv.item.VulcanCannon;
+import info.quadtree.rv.projectile.Bolt;
 import sv.vfx.Spark;
 
 public class BossEnemy extends BasicEnemy {

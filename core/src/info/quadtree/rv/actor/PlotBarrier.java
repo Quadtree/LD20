@@ -1,9 +1,9 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.dynamics.BodyDef;
 
-import rv.Game;
+import info.quadtree.rv.Game;
 import sgf.SGF;
 
 public class PlotBarrier extends PhysicalActor {

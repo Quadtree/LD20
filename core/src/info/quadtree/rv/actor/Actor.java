@@ -1,4 +1,4 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 public abstract class Actor {
 	public void update(){}

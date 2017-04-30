@@ -1,9 +1,9 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
-import rv.Game;
-import rv.item.Shield;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.Shield;
 import sgf.SGF;
 
 public class ShieldEnemy extends BasicEnemy {

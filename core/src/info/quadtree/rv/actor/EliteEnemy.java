@@ -1,8 +1,8 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Game;
-import rv.item.BoltGun;
-import rv.projectile.Bolt;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.BoltGun;
+import info.quadtree.rv.projectile.Bolt;
 
 public class EliteEnemy extends BasicEnemy {
 

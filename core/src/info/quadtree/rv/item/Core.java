@@ -1,6 +1,6 @@
-package rv.item;
+package info.quadtree.rv.item;
 
-import rv.Game;
+import info.quadtree.rv.Game;
 
 public class Core extends Item {
 

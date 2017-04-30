@@ -1,4 +1,4 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,8 +9,8 @@ import java.awt.geom.Point2D;
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.common.Vec2;
 
-import rv.Game;
-import rv.item.Item;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.Item;
 import sgf.SGF;
 import sv.vfx.Spark;
 

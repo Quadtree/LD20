@@ -1,10 +1,10 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Dialog;
-import rv.Game;
-import rv.item.RepairCartridge;
-import rv.item.Shield;
-import rv.item.Turbo;
+import info.quadtree.rv.Dialog;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.RepairCartridge;
+import info.quadtree.rv.item.Shield;
+import info.quadtree.rv.item.Turbo;
 
 public class Shopkeeper2 extends ShopkeeperRobot {
 

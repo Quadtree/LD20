@@ -1,9 +1,9 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-import rv.Game;
+import info.quadtree.rv.Game;
 
 public class PhysicalActor extends Actor {
 	protected Body body;

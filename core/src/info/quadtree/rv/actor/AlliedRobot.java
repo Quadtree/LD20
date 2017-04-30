@@ -1,4 +1,4 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
@@ -6,7 +6,7 @@ import org.jbox2d.dynamics.ContactListener;
 import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
 
-import rv.Game;
+import info.quadtree.rv.Game;
 
 public class AlliedRobot extends Robot implements ContactListener {
 

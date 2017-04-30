@@ -1,7 +1,7 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Dialog;
-import rv.Game;
+import info.quadtree.rv.Dialog;
+import info.quadtree.rv.Game;
 
 public class Villager extends AlliedRobot {
 

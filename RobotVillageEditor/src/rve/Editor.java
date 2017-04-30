@@ -1,4 +1,4 @@
-package rve;
+package info.quadtree.rve;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,8 +16,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import rv.NPCDesc;
-import rv.WorldData;
+import info.quadtree.rv.NPCDesc;
+import info.quadtree.rv.WorldData;
 import sgf.GameInterface;
 import sgf.SGF;
 

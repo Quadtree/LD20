@@ -1,8 +1,8 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Game;
-import rv.item.DevastatorCannon;
-import rv.projectile.Missile;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.DevastatorCannon;
+import info.quadtree.rv.projectile.Missile;
 
 public class MissileEnemy extends BasicEnemy {
 

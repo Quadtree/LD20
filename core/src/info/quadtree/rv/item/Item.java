@@ -1,4 +1,4 @@
-package rv.item;
+package info.quadtree.rv.item;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,9 +7,9 @@ import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.dynamics.BodyDef;
 
-import rv.Game;
-import rv.actor.PhysicalActor;
-import rv.actor.Player;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.actor.PhysicalActor;
+import info.quadtree.rv.actor.Player;
 import sgf.SGF;
 
 public abstract class Item extends PhysicalActor implements KeyListener{

@@ -1,7 +1,7 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Game;
-import rv.item.Turbo;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.Turbo;
 
 public class FastEnemy extends BasicEnemy{
 

@@ -1,4 +1,4 @@
-package rv;
+package info.quadtree.rv;
 
 import java.applet.Applet;
 import java.awt.Image;
@@ -10,15 +10,11 @@ import sgf.SGF;
 public class RobotVillage extends Applet implements ImageSource {
 
 	public static RobotVillage s;
-	
+
 	@Override
-	public void init() {
-		//System.out.println("Applet starting...");
-		s = this;
-		
-		SGF.getInstance().start(this, this, new Game());
-		
-		super.init();
+	public void destroy() {
+		// System.out.println("Applet shutting down...");
+		SGF.getInstance().stop();
 	}
 
 	@Override
@@ -27,8 +23,12 @@ public class RobotVillage extends Applet implements ImageSource {
 	}
 
 	@Override
-	public void destroy() {
-		//System.out.println("Applet shutting down...");
-		SGF.getInstance().stop();
+	public void init() {
+		// System.out.println("Applet starting...");
+		s = this;
+
+		SGF.getInstance().start(this, this, new Game());
+
+		super.init();
 	}
 }

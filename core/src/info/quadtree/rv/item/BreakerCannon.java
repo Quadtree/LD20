@@ -1,8 +1,8 @@
-package rv.item;
+package info.quadtree.rv.item;
 
-import rv.Game;
-import rv.actor.Player;
-import rv.projectile.BreakerShot;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.actor.Player;
+import info.quadtree.rv.projectile.BreakerShot;
 
 public class BreakerCannon extends Item {
 

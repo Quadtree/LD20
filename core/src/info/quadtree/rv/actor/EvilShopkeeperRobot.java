@@ -1,18 +1,18 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.common.Vec2;
 
-import rv.Dialog;
-import rv.FinalCinematic;
-import rv.Game;
-import rv.item.BoltGun;
-import rv.item.DevastatorCannon;
-import rv.item.NeedleGun;
-import rv.item.VulcanCannon;
-import rv.projectile.Bolt;
-import rv.projectile.Missile;
+import info.quadtree.rv.Dialog;
+import info.quadtree.rv.FinalCinematic;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.BoltGun;
+import info.quadtree.rv.item.DevastatorCannon;
+import info.quadtree.rv.item.NeedleGun;
+import info.quadtree.rv.item.VulcanCannon;
+import info.quadtree.rv.projectile.Bolt;
+import info.quadtree.rv.projectile.Missile;
 import sv.vfx.Spark;
 
 public class EvilShopkeeperRobot extends ShopkeeperRobot{

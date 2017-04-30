@@ -1,9 +1,9 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.FilterData;
-import rv.Game;
-import rv.item.RepairCartridge;
-import rv.projectile.Bolt;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.RepairCartridge;
+import info.quadtree.rv.projectile.Bolt;
 import sv.vfx.Spark;
 
 public class BasicEnemy extends Robot {

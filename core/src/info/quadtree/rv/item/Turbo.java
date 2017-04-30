@@ -1,4 +1,4 @@
-package rv.item;
+package info.quadtree.rv.item;
 
 public class Turbo extends Item {
 

@@ -1,11 +1,11 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
 import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 
-import rv.Game;
-import rv.projectile.Shockbomb;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.projectile.Shockbomb;
 import sgf.SGF;
 
 public class Robot extends PhysicalActor implements Harmable {

@@ -1,10 +1,10 @@
-package rv.actor;
+package info.quadtree.rv.actor;
 
-import rv.Dialog;
-import rv.Game;
-import rv.item.BreakerCannon;
-import rv.item.ShockbombLauncher;
-import rv.item.SpreadBlaster;
+import info.quadtree.rv.Dialog;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.item.BreakerCannon;
+import info.quadtree.rv.item.ShockbombLauncher;
+import info.quadtree.rv.item.SpreadBlaster;
 
 public class Shopkeeper3 extends ShopkeeperRobot {
 

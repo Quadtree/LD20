@@ -1,4 +1,4 @@
-package rve;
+package info.quadtree.rve;
 
 import javax.swing.JFrame;
 

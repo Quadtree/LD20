@@ -1,11 +1,11 @@
-package rv.projectile;
+package info.quadtree.rv.projectile;
 
 import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
-import rv.Game;
-import rv.actor.PhysicalActor;
+import info.quadtree.rv.Game;
+import info.quadtree.rv.actor.PhysicalActor;
 import sgf.SGF;
 
 public class BreakerShot extends PhysicalActor {
