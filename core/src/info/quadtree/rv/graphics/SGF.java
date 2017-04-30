@@ -99,7 +99,15 @@ public class SGF implements InputProcessor {
 		if (!loadedImages.containsKey(toRender.imgName))
 			loadedImages.put(toRender.imgName, new Texture(Gdx.files.internal(toRender.imgName + ".png")));
 
-		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x - toRender.w / 2, toRender.y - toRender.h / 2, toRender.w / 2, toRender.h / 2, toRender.w, toRender.h, 1, 1,
+		float w = toRender.w;
+		float h = toRender.h;
+
+		if (toRender.w < 0) {
+			w = -w * loadedImages.get(toRender.imgName).getWidth();
+			h = -h * loadedImages.get(toRender.imgName).getHeight();
+		}
+
+		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x - w / 2, toRender.y - h / 2, w / 2, h / 2, w, h, 1, 1,
 				toRender.rot * (180.f / (float) Math.PI));
 	}
 

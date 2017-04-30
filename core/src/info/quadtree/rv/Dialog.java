@@ -52,6 +52,9 @@ public class Dialog extends Actor implements KeyListener {
 
 	@Override
 	public void render() {
+		if (Game.s.titleScreenUp)
+			return;
+
 		SGF.getInstance().renderImage("inventoryback", 512, 600, 1024, 336, 0, false);
 
 		for (int i = 0; i < Math.min(shown, messages.size()); i++) {
