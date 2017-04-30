@@ -1,8 +1,13 @@
 package info.quadtree.rv.graphics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SGF {
 	private static SGF sgf = new SGF();
@@ -14,6 +19,8 @@ public class SGF {
 	SpriteBatch batch;
 
 	GameInterface game;
+
+	Map<String, Texture> loadedImages = new HashMap<String, Texture>();
 
 	long milisUpdated = 0;
 
@@ -67,7 +74,10 @@ public class SGF {
 	}
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
+		if (!loadedImages.containsKey(imgName))
+			loadedImages.put(imgName, new Texture(Gdx.files.internal(imgName + ".png")));
 
+		batch.draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot);
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
