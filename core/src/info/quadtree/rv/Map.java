@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-import org.jbox2d.collision.FilterData;
-import org.jbox2d.collision.shapes.PolygonDef;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.collision.shapes.PolygonDef;
+import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.dynamics.Body;
+import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.graphics.SGF;

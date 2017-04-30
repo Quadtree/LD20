@@ -1,29 +1,26 @@
 package info.quadtree.rv;
 
 import java.applet.AudioClip;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.jbox2d.collision.AABB;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.ContactListener;
-import org.jbox2d.dynamics.World;
-import org.jbox2d.dynamics.contacts.ContactPoint;
-import org.jbox2d.dynamics.contacts.ContactResult;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.World;
 
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.actor.EvilShopkeeperRobot;
 import info.quadtree.rv.actor.Player;
-import info.quadtree.rv.item.Item;
-import sgf.GameInterface;
+import info.quadtree.rv.graphics.KeyEvent;
+import info.quadtree.rv.graphics.KeyListener;
+import info.quadtree.rv.graphics.MouseEvent;
+import info.quadtree.rv.graphics.MouseListener;
 import info.quadtree.rv.graphics.SGF;
+import info.quadtree.rv.item.Item;
 
-public class Game implements GameInterface, KeyListener, MouseListener, ContactListener {
+public class Game implements KeyListener, MouseListener, ContactListener {
 
 	public static Game s;
 
@@ -64,8 +61,7 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 		s = this;
 	}
 
-	@Override
-	public void add(ContactPoint point) {
+	public void add(Contact point) {
 		Object o1 = point.shape1.getBody().getUserData();
 		Object o2 = point.shape2.getBody().getUserData();
 
@@ -73,6 +69,17 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 			((ContactListener) o1).add(point);
 		if (o2 != null && o2 instanceof ContactListener)
 			((ContactListener) o2).add(point);
+	}
+
+	@Override
+	public void beginContact(Contact point) {
+		Object o1 = point.getFixtureA().getBody().getUserData();
+		Object o2 = point.getFixtureB().getBody().getUserData();
+
+		if (o1 != null && o1 instanceof ContactListener)
+			((ContactListener) o1).beginContact(point);
+		if (o2 != null && o2 instanceof ContactListener)
+			((ContactListener) o2).beginContact(point);
 	}
 
 	float getInvItemX(int itemId) {
@@ -83,7 +90,6 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 		return 250 + (itemId / 17 * 38);
 	}
 
-	@Override
 	public void init() {
 
 		at = new AudioThread();
@@ -93,7 +99,8 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 		rand = new Random();
 		audioFiles = new HashMap<String, AudioClip>();
 		actors = new ArrayList<Actor>();
-		physicsWorld = new World(new AABB(new Vec2(0, 0), new Vec2(1024, 1024)), new Vec2(), true);
+		// new AABB(new Vec2(0, 0), new Vec2(1024, 1024)), new Vec2(), true
+		physicsWorld = new World(new Vector2(0, 0), dialogUp);
 		physicsWorld.setContactListener(this);
 		map = new Map();
 		actors.add(map);
@@ -198,8 +205,7 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 
 	}
 
-	@Override
-	public void persist(ContactPoint point) {
+	public void persist(Contact point) {
 		// TODO Auto-generated method stub
 
 	}
@@ -218,13 +224,11 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 		at.audioNames.add(name);
 	}
 
-	@Override
-	public void remove(ContactPoint point) {
+	public void remove(Contact point) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void render() {
 		SGF.getInstance().setCamera(player.getPosition().x, player.getPosition().y, 32);
 		for (Actor a : actors)
@@ -336,26 +340,13 @@ public class Game implements GameInterface, KeyListener, MouseListener, ContactL
 		}
 	}
 
-	@Override
-	public void result(ContactResult point) {
-		Object o1 = point.shape1.getBody().getUserData();
-		Object o2 = point.shape2.getBody().getUserData();
-
-		if (o1 != null && o1 instanceof ContactListener)
-			((ContactListener) o1).result(point);
-		if (o2 != null && o2 instanceof ContactListener)
-			((ContactListener) o2).result(point);
-	}
-
-	@Override
 	public void shutdown() {
 		at.keepRun = false;
 	}
 
-	@Override
 	public void update() {
 		if (!inventoryScreen) {
-			physicsWorld.step(1.f / 60.f, 10);
+			physicsWorld.step(1.f / 60.f, 10, 10);
 
 			boolean dialogTemp = false;
 

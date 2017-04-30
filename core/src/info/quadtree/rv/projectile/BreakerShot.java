@@ -1,9 +1,9 @@
 package info.quadtree.rv.projectile;
 
-import org.jbox2d.collision.FilterData;
-import org.jbox2d.collision.shapes.CircleDef;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyDef;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
+import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.PhysicalActor;
 import info.quadtree.rv.graphics.SGF;

@@ -1,8 +1,7 @@
 package info.quadtree.rv;
 
-import java.awt.event.KeyEvent;
-
 import info.quadtree.rv.actor.EvilShopkeeperRobot;
+import info.quadtree.rv.graphics.KeyEvent;
 
 public class FinalCinematic extends Dialog {
 

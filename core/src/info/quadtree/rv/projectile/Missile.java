@@ -1,12 +1,12 @@
 package info.quadtree.rv.projectile;
 
-import org.jbox2d.collision.FilterData;
-import org.jbox2d.collision.shapes.PolygonDef;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.ContactListener;
-import org.jbox2d.dynamics.contacts.ContactPoint;
-import org.jbox2d.dynamics.contacts.ContactResult;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.collision.shapes.PolygonDef;
+import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
+import com.badlogic.gdx.physics.box2d.dynamics.ContactListener;
+import com.badlogic.gdx.physics.box2d.dynamics.contacts.ContactPoint;
+import com.badlogic.gdx.physics.box2d.dynamics.contacts.ContactResult;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.Harmable;

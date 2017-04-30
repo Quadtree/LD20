@@ -1,7 +1,7 @@
 package info.quadtree.rv.actor;
 
-import org.jbox2d.collision.FilterData;
-import org.jbox2d.collision.shapes.CircleDef;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.Shield;
 import info.quadtree.rv.graphics.SGF;

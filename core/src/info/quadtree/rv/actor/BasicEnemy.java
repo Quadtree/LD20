@@ -1,6 +1,6 @@
 package info.quadtree.rv.actor;
 
-import org.jbox2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.RepairCartridge;
 import info.quadtree.rv.projectile.Bolt;

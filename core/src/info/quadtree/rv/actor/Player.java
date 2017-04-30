@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
-import org.jbox2d.collision.FilterData;
-import org.jbox2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.collision.FilterData;
+import com.badlogic.gdx.physics.box2d.common.Vec2;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.Item;

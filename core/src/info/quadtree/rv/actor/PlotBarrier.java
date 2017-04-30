@@ -1,7 +1,7 @@
 package info.quadtree.rv.actor;
 
-import org.jbox2d.collision.shapes.CircleDef;
-import org.jbox2d.dynamics.BodyDef;
+import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
+import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.graphics.SGF;
