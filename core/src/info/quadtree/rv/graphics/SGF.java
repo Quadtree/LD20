@@ -18,12 +18,13 @@ public class SGF {
 	}
 
 	SpriteBatch batch;
-
 	GameInterface game;
 
 	Map<String, Texture> loadedImages = new HashMap<String, Texture>();
 
 	long milisUpdated = 0;
+
+	SpriteBatch uiBatch;
 
 	public void addKeyListener(KeyListener keyListener) {
 		// @todo: Implment
@@ -68,17 +69,20 @@ public class SGF {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
+		uiBatch.begin();
 
 		game.render();
 
 		batch.end();
+		uiBatch.end();
 	}
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
 		if (!loadedImages.containsKey(imgName))
 			loadedImages.put(imgName, new Texture(Gdx.files.internal(imgName + ".png")));
 
-		batch.draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot * (180.f / (float) Math.PI));
+		if (!useCamera)
+			(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot * (180.f / (float) Math.PI));
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
@@ -97,7 +101,6 @@ public class SGF {
 		proj.scl(64);
 		proj.scl(1.f / Gdx.graphics.getWidth(), 1.f / Gdx.graphics.getHeight(), 1);
 		proj.translate(-x, -y, 0);
-		// proj.translate(x, y, 0);
 
 		batch.setProjectionMatrix(proj);
 	}
@@ -106,6 +109,7 @@ public class SGF {
 		log("Starting up...");
 		this.game = game;
 		batch = new SpriteBatch();
+		uiBatch = new SpriteBatch();
 		milisUpdated = System.currentTimeMillis();
 
 		game.init();
