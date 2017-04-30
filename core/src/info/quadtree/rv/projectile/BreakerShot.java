@@ -2,7 +2,7 @@ package info.quadtree.rv.projectile;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.PhysicalActor;
@@ -32,7 +32,7 @@ public class BreakerShot extends PhysicalActor {
 		
 		body.setMassFromShapes();
 		
-		body.setLinearVelocity(new Vec2((float)Math.cos(angle), (float)Math.sin(angle)).mul(24));
+		body.setLinearVelocity(new Vector2((float)Math.cos(angle), (float)Math.sin(angle)).mul(24));
 		
 		body.setUserData(this);
 	}

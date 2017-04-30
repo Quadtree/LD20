@@ -2,7 +2,7 @@ package info.quadtree.rv.projectile;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.PolygonDef;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 import com.badlogic.gdx.physics.box2d.dynamics.ContactListener;
 import com.badlogic.gdx.physics.box2d.dynamics.contacts.ContactPoint;
@@ -46,11 +46,11 @@ public class Missile extends PhysicalActor implements ContactListener{
 
 	@Override
 	public void update() {
-		body.setLinearVelocity(new Vec2((float)Math.cos(body.getAngle()), (float)Math.sin(body.getAngle())).mul(7.5f));
+		body.setLinearVelocity(new Vector2((float)Math.cos(body.getAngle()), (float)Math.sin(body.getAngle())).mul(7.5f));
 		
-		Vec2 pLeft = body.getPosition().add(new Vec2((float)Math.cos(body.getAngle() - 0.2f), (float)Math.sin(body.getAngle() - 0.2f)));
-		Vec2 pCenter = body.getPosition().add(new Vec2((float)Math.cos(body.getAngle()), (float)Math.sin(body.getAngle())));
-		Vec2 pRight = body.getPosition().add(new Vec2((float)Math.cos(body.getAngle() + 0.2f), (float)Math.sin(body.getAngle() + 0.2f)));
+		Vector2 pLeft = body.getPosition().add(new Vector2((float)Math.cos(body.getAngle() - 0.2f), (float)Math.sin(body.getAngle() - 0.2f)));
+		Vector2 pCenter = body.getPosition().add(new Vector2((float)Math.cos(body.getAngle()), (float)Math.sin(body.getAngle())));
+		Vector2 pRight = body.getPosition().add(new Vector2((float)Math.cos(body.getAngle() + 0.2f), (float)Math.sin(body.getAngle() + 0.2f)));
 		
 		float dLeft = pLeft.sub(Game.s.player.getPosition()).lengthSquared();
 		float dCenter = pCenter.sub(Game.s.player.getPosition()).lengthSquared();

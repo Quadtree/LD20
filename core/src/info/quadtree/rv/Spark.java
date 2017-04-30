@@ -2,7 +2,7 @@ package info.quadtree.rv.vfx;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 
 import info.quadtree.rv.actor.PhysicalActor;
@@ -40,7 +40,7 @@ public class Spark extends PhysicalActor {
 		power *= Game.s.rand.nextFloat();
 		float ang = Game.s.rand.nextFloat() * 6.2f;
 
-		body.setLinearVelocity(new Vec2((float) Math.cos(ang) * power, (float) Math.sin(ang) * power));
+		body.setLinearVelocity(new Vector2((float) Math.cos(ang) * power, (float) Math.sin(ang) * power));
 
 		this.size = size;
 		this.decay = decay;

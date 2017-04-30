@@ -9,7 +9,7 @@ import info.quadtree.rv.graphics.SGF;
 import info.quadtree.rv.projectile.Shockbomb;
 
 public class Robot extends PhysicalActor implements Harmable {
-	Vec2 aimPoint;
+	Vector2 aimPoint;
 
 	float baseFacing;
 
@@ -52,7 +52,7 @@ public class Robot extends PhysicalActor implements Harmable {
 		return (float) Math.atan2(aimPoint.y - body.getPosition().y, aimPoint.x - body.getPosition().x);
 	}
 
-	public Vec2 getAimPoint() {
+	public Vector2 getAimPoint() {
 		return aimPoint;
 	}
 
@@ -66,7 +66,7 @@ public class Robot extends PhysicalActor implements Harmable {
 		return hp;
 	}
 
-	public Vec2 getMovePoint() {
+	public Vector2 getMovePoint() {
 		return aimPoint;
 	}
 
@@ -96,7 +96,7 @@ public class Robot extends PhysicalActor implements Harmable {
 	@Override
 	public void render() {
 
-		if (body.getLinearVelocity().length() > 0.1f)
+		if (body.getLinearVelocity().len() > 0.1f)
 			baseFacing = -(float) Math.atan2(body.getLinearVelocity().y, body.getLinearVelocity().x);
 
 		SGF.getInstance().renderImage("Base" + tread + getFacingImageNumber(baseFacing), body.getPosition().x, body.getPosition().y, getSize(), getSize(), 0, true);
@@ -111,7 +111,7 @@ public class Robot extends PhysicalActor implements Harmable {
 	}
 
 	protected void robotUpdate() {
-		body.setLinearVelocity(body.getLinearVelocity().mul(0.8f));
+		body.setLinearVelocity(body.getLinearVelocity().scl(0.8f));
 
 		// forward backward movement
 
@@ -122,10 +122,10 @@ public class Robot extends PhysicalActor implements Harmable {
 		if (!forward && backward)
 			fb = -1;
 
-		Vec2 force = getMovePoint().sub(body.getPosition());
-		force.normalize();
+		Vector2 force = getMovePoint().sub(body.getPosition());
+		force.nor();
 
-		body.applyImpulse(force.mul(fb).mul(getSpeedMod()), new Vec2());
+		body.applyLinearImpulse(force.scl(fb).scl(getSpeedMod()), new Vector2(), true);
 
 		// strafing
 
@@ -138,14 +138,14 @@ public class Robot extends PhysicalActor implements Harmable {
 
 		float aimFacing = (float) Math.atan2(getMovePoint().y - body.getPosition().y, getMovePoint().x - body.getPosition().x);
 
-		force = new Vec2((float) Math.cos(aimFacing + 1.6f), (float) Math.sin(aimFacing + 1.6f));
+		force = new Vector2((float) Math.cos(aimFacing + 1.6f), (float) Math.sin(aimFacing + 1.6f));
 
-		body.applyImpulse(force.mul(lr).mul(getSpeedMod()), new Vec2());
+		body.applyLinearImpulse(force.scl(lr).scl(getSpeedMod()), new Vector2(), true);
 
 		if (muzzleBlastTimer > 0)
 			muzzleBlastTimer--;
 
-		moveSinceLastTread += body.getLinearVelocity().length();
+		moveSinceLastTread += body.getLinearVelocity().len();
 
 		if (moveSinceLastTread > 0.5f) {
 			if (tread.equals("A"))
@@ -176,10 +176,10 @@ public class Robot extends PhysicalActor implements Harmable {
 		// System.out.println(this + " took " + amount + " damage!");
 	}
 
-	public boolean testLOSTo(Vec2 trg) {
-		Vec2 cur = new Vec2(body.getPosition());
-		Vec2 delta = trg.sub(cur);
-		delta = delta.mul(0.3f / delta.length());
+	public boolean testLOSTo(Vector2 trg) {
+		Vector2 cur = new Vector2(body.getPosition());
+		Vector2 delta = trg.sub(cur);
+		delta = delta.scl(0.3f / delta.len());
 
 		while (Math.abs(cur.x - trg.x) > 1 || Math.abs(cur.y - trg.y) > 1) {
 			if (!Game.s.map.isPassable((int) (cur.x + 0.5f), (int) (cur.y + 0.5f)))

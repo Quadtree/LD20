@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.Item;
@@ -70,7 +70,7 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	@Override
 	public void reset() {
 		hp = MAX_HP;
-		body.setXForm(new Vec2(502, 545), 0.f);
+		body.setXForm(new Vector2(502, 545), 0.f);
 	}
 	
 	public float getShield()
@@ -148,7 +148,7 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	public void update() {
 		
 		Point2D ap = SGF.getInstance().screenToReal(new Point2D.Float(mScreenX, mScreenY));
-		aim(new Vec2((float)ap.getX(), (float)ap.getY()));
+		aim(new Vector2((float)ap.getX(), (float)ap.getY()));
 		
 		if(firingLeft && inventory[quickItemsSelected * 2] != null) inventory[quickItemsSelected * 2].tryUse(this);
 		if(firingRight && inventory[quickItemsSelected * 2 + 1] != null) inventory[quickItemsSelected * 2 + 1].tryUse(this);
@@ -165,18 +165,18 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	}
 
 	@Override
-	public Vec2 getMovePoint() {
-		if(plUp && !plDown && !plLeft && !plRight) return getPosition().add(new Vec2(0, -1));
-		if(!plUp && plDown && !plLeft && !plRight) return getPosition().add(new Vec2(0, 1));
-		if(!plUp && !plDown && plLeft && !plRight) return getPosition().add(new Vec2(-1, 0));
-		if(!plUp && !plDown && !plLeft && plRight) return getPosition().add(new Vec2(1, 0));
+	public Vector2 getMovePoint() {
+		if(plUp && !plDown && !plLeft && !plRight) return getPosition().add(new Vector2(0, -1));
+		if(!plUp && plDown && !plLeft && !plRight) return getPosition().add(new Vector2(0, 1));
+		if(!plUp && !plDown && plLeft && !plRight) return getPosition().add(new Vector2(-1, 0));
+		if(!plUp && !plDown && !plLeft && plRight) return getPosition().add(new Vector2(1, 0));
 		
-		if(plUp && !plDown && plLeft && !plRight) return getPosition().add(new Vec2(-1, -1));
-		if(plUp && !plDown && !plLeft && plRight) return getPosition().add(new Vec2(1, -1));
-		if(!plUp && plDown && plLeft && !plRight) return getPosition().add(new Vec2(-1, 1));
-		if(!plUp && plDown && !plLeft && plRight) return getPosition().add(new Vec2(1, 1));
+		if(plUp && !plDown && plLeft && !plRight) return getPosition().add(new Vector2(-1, -1));
+		if(plUp && !plDown && !plLeft && plRight) return getPosition().add(new Vector2(1, -1));
+		if(!plUp && plDown && plLeft && !plRight) return getPosition().add(new Vector2(-1, 1));
+		if(!plUp && plDown && !plLeft && plRight) return getPosition().add(new Vector2(1, 1));
 		
-		return getPosition().add(new Vec2(1, 1));
+		return getPosition().add(new Vector2(1, 1));
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package info.quadtree.rv.projectile;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 import com.badlogic.gdx.physics.box2d.dynamics.ContactListener;
 import com.badlogic.gdx.physics.box2d.dynamics.contacts.ContactPoint;
@@ -18,7 +18,7 @@ public class Shockbomb extends PhysicalActor implements ContactListener {
 	
 	boolean destroyed = false;
 	
-	Vec2 target;
+	Vector2 target;
 	
 	public Shockbomb(float x, float y, float angle, float speed, float tx, float ty)
 	{
@@ -42,11 +42,11 @@ public class Shockbomb extends PhysicalActor implements ContactListener {
 		
 		body.setMassFromShapes();
 		
-		body.setLinearVelocity(new Vec2((float)Math.cos(angle), (float)Math.sin(angle)).mul(8));
+		body.setLinearVelocity(new Vector2((float)Math.cos(angle), (float)Math.sin(angle)).mul(8));
 		
 		body.setUserData(this);
 		
-		target = new Vec2(tx,ty);
+		target = new Vector2(tx,ty);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 	public EvilShopkeeperRobot(float x, float y) {
 		super(x, y);
 
-		startPos = new Vec2(x, y);
+		startPos = new Vector2(x, y);
 
 		reset();
 
@@ -66,7 +66,7 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 		dynamic = true;
 		lookAtPlayer = false;
 
-		Game.s.player.getBody().applyImpulse(new Vec2(-40, 0), new Vec2());
+		Game.s.player.getBody().applyImpulse(new Vector2(-40, 0), new Vector2());
 	}
 
 	public void fireCannon() {
@@ -200,7 +200,7 @@ public class EvilShopkeeperRobot extends ShopkeeperRobot {
 				else
 					backward = false;
 			} else {
-				aimPoint = getPosition().add(new Vec2((float) Math.cos(getAimFacing() + 0.01f), (float) Math.sin(getAimFacing() + 0.01f)));
+				aimPoint = getPosition().add(new Vector2((float) Math.cos(getAimFacing() + 0.01f), (float) Math.sin(getAimFacing() + 0.01f)));
 			}
 
 			fireVolley();

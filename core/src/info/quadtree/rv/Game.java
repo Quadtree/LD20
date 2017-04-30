@@ -99,7 +99,7 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 		rand = new Random();
 		audioFiles = new HashMap<String, AudioClip>();
 		actors = new ArrayList<Actor>();
-		// new AABB(new Vec2(0, 0), new Vec2(1024, 1024)), new Vec2(), true
+		// new AABB(new Vector2(0, 0), new Vector2(1024, 1024)), new Vector2(), true
 		physicsWorld = new World(new Vector2(0, 0), dialogUp);
 		physicsWorld.setContactListener(this);
 		map = new Map();
@@ -364,7 +364,7 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 			dialogUp = dialogTemp;
 		}
 
-		if (!freeItemGiven && player.getPosition().sub(new Vec2(512, 512)).length() > 30) {
+		if (!freeItemGiven && player.getPosition().sub(new Vector2(512, 512)).length() > 30) {
 			for (Actor a : actors) {
 				if (a instanceof EvilShopkeeperRobot) {
 					EvilShopkeeperRobot er = (EvilShopkeeperRobot) a;

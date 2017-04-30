@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.physics.box2d.collision.FilterData;
 import com.badlogic.gdx.physics.box2d.collision.shapes.PolygonDef;
-import com.badlogic.gdx.physics.box2d.common.Vec2;
+import com.badlogic.gdx.physics.box2d.common.Vector2;
 import com.badlogic.gdx.physics.box2d.dynamics.Body;
 import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
 
@@ -93,11 +93,11 @@ public class Map extends Actor {
 								break;
 						}
 
-						pd.setAsBox(0.5f, 0.5f * boxHeight, new Vec2(x, y + boxHeight / 2.f - 0.5f), 0);
+						pd.setAsBox(0.5f, 0.5f * boxHeight, new Vector2(x, y + boxHeight / 2.f - 0.5f), 0);
 
 						// if(x == 512)
 						// System.out.println(0.5f + " " + 0.5f*boxHeight + " "
-						// + new Vec2(x,y + boxHeight/2.f - 0.5f));
+						// + new Vector2(x,y + boxHeight/2.f - 0.5f));
 
 						body.createShape(pd);
 					}
