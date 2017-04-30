@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 public class SGF implements InputProcessor {
-	class QueuedImage {
+	class QueuedImage extends QueuedRenderOp {
 		String imgName;
 		public float rot;
 		public float x, y, w, h;
@@ -34,7 +34,11 @@ public class SGF implements InputProcessor {
 
 	}
 
-	class QueuedText {
+	class QueuedRenderOp {
+
+	}
+
+	class QueuedText extends QueuedRenderOp {
 		public int fontSize;
 		public String text;
 		public float x, y, cr, cg, cb;
@@ -73,15 +77,12 @@ public class SGF implements InputProcessor {
 	Set<MouseListener> mouseListeners = new HashSet<MouseListener>();
 	Set<MouseMotionListener> mouseMotionListeners = new HashSet<MouseMotionListener>();
 
-	Array<QueuedImage> normalRenderQueue = new Array<QueuedImage>();
+	Array<QueuedRenderOp> normalRenderQueue = new Array<QueuedRenderOp>();
 
 	Matrix4 screenToReal = new Matrix4();
 
-	Array<QueuedText> textRenderQueue = new Array<QueuedText>();
 	SpriteBatch uiBatch;
-	Array<QueuedImage> uiRenderQueue = new Array<QueuedImage>();
-
-	Array<QueuedText> uiTextRenderQueue = new Array<QueuedText>();
+	Array<QueuedRenderOp> uiRenderQueue = new Array<QueuedRenderOp>();
 
 	public void addKeyListener(KeyListener keyListener) {
 		keyListeners.add(keyListener);
@@ -119,6 +120,13 @@ public class SGF implements InputProcessor {
 			loadedFonts.put(fontName, new BitmapFont(Gdx.files.internal(fontName + ".fnt")));
 
 		loadedFonts.get(fontName).draw(useCamera ? batch : uiBatch, qt.text, qt.x, qt.y);
+	}
+
+	private void doRenderOp(QueuedRenderOp op, boolean useCamera) {
+		if (op instanceof QueuedImage)
+			doDrawImage((QueuedImage) op, useCamera);
+		if (op instanceof QueuedText)
+			doDrawText((QueuedText) op, useCamera);
 	}
 
 	@Override
@@ -176,8 +184,6 @@ public class SGF implements InputProcessor {
 
 		normalRenderQueue.clear();
 		uiRenderQueue.clear();
-		textRenderQueue.clear();
-		uiTextRenderQueue.clear();
 
 		game.render();
 
@@ -185,8 +191,8 @@ public class SGF implements InputProcessor {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		for (QueuedImage tr : normalRenderQueue)
-			doDrawImage(tr, true);
+		for (QueuedRenderOp tr : normalRenderQueue)
+			doRenderOp(tr, true);
 		batch.end();
 
 		// uiBatch.setProjectionMatrix(new Matrix4().idt().scl(-2.f /
@@ -195,10 +201,8 @@ public class SGF implements InputProcessor {
 		// / 2, 0));
 
 		uiBatch.begin();
-		for (QueuedImage tr : uiRenderQueue)
-			doDrawImage(tr, false);
-		for (QueuedText qt : uiTextRenderQueue)
-			doDrawText(qt, false);
+		for (QueuedRenderOp tr : uiRenderQueue)
+			doRenderOp(tr, false);
 		uiBatch.end();
 	}
 
@@ -211,9 +215,9 @@ public class SGF implements InputProcessor {
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
 		if (useCamera)
-			textRenderQueue.add(new QueuedText(text, x, -y, cr, cg, cb, fontSize));
+			normalRenderQueue.add(new QueuedText(text, x, -y, cr, cg, cb, fontSize));
 		else
-			uiTextRenderQueue.add(new QueuedText(text, x, Gdx.graphics.getHeight() - (y - fontSize / 2), cr, cg, cb, fontSize));
+			uiRenderQueue.add(new QueuedText(text, x, Gdx.graphics.getHeight() - (y - fontSize / 2), cr, cg, cb, fontSize));
 	}
 
 	public Point2D screenToReal(Point2D pt) {
