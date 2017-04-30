@@ -93,7 +93,8 @@ public class SGF implements InputProcessor {
 		if (!loadedImages.containsKey(toRender.imgName))
 			loadedImages.put(toRender.imgName, new Texture(Gdx.files.internal(toRender.imgName + ".png")));
 
-		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x, toRender.y, toRender.w / 2, toRender.h / 2, toRender.w, toRender.h, 1, 1, toRender.rot * (180.f / (float) Math.PI));
+		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x - toRender.w / 2, toRender.y - toRender.h / 2, toRender.w / 2, toRender.h / 2, toRender.w, toRender.h, 1, 1,
+				toRender.rot * (180.f / (float) Math.PI));
 	}
 
 	@Override
@@ -161,7 +162,10 @@ public class SGF implements InputProcessor {
 			doDrawImage(tr, true);
 		batch.end();
 
-		uiBatch.setProjectionMatrix(new Matrix4().idt().scl(-2.f / Gdx.graphics.getWidth(), -2.f / Gdx.graphics.getHeight(), 1).translate(-Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2, 0));
+		// uiBatch.setProjectionMatrix(new Matrix4().idt().scl(-2.f /
+		// Gdx.graphics.getWidth(), -2.f / Gdx.graphics.getHeight(),
+		// 1).translate(-Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight()
+		// / 2, 0));
 
 		uiBatch.begin();
 		for (QueuedImage tr : uiRenderQueue)
@@ -170,12 +174,10 @@ public class SGF implements InputProcessor {
 	}
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
-		QueuedImage tr = new QueuedImage(x, y, w, h, rot, imgName);
-
 		if (useCamera)
-			normalRenderQueue.add(tr);
+			normalRenderQueue.add(new QueuedImage(x, y, w, h, rot, imgName));
 		else
-			uiRenderQueue.add(tr);
+			uiRenderQueue.add(new QueuedImage(x, Gdx.graphics.getHeight() - y, w, h, rot, imgName));
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
