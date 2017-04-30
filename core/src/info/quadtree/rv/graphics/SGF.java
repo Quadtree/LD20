@@ -9,8 +9,26 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.utils.Array;
 
 public class SGF {
+	class ToRender {
+		String imgName;
+		public float rot;
+		public float x, y, w, h;
+
+		public ToRender(float x, float y, float w, float h, float rot, String imgName) {
+			super();
+			this.x = x;
+			this.y = y;
+			this.w = w;
+			this.h = h;
+			this.rot = rot;
+			this.imgName = imgName;
+		}
+
+	}
+
 	private static SGF sgf = new SGF();
 
 	public static SGF getInstance() {
@@ -18,13 +36,18 @@ public class SGF {
 	}
 
 	SpriteBatch batch;
+
 	GameInterface game;
 
 	Map<String, Texture> loadedImages = new HashMap<String, Texture>();
 
 	long milisUpdated = 0;
 
+	Array<ToRender> normalRenderQueue = new Array<ToRender>();
+
 	SpriteBatch uiBatch;
+
+	Array<ToRender> uiRenderQueue = new Array<ToRender>();
 
 	public void addKeyListener(KeyListener keyListener) {
 		// @todo: Implment
@@ -36,6 +59,13 @@ public class SGF {
 
 	public void addMouseMotionListener(MouseMotionListener mouseListener) {
 		// @todo: Implment
+	}
+
+	private void doDrawImage(ToRender toRender, boolean useCamera) {
+		if (!loadedImages.containsKey(toRender.imgName))
+			loadedImages.put(toRender.imgName, new Texture(Gdx.files.internal(toRender.imgName + ".png")));
+
+		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x, toRender.y, toRender.w / 2, toRender.h / 2, toRender.w, toRender.h, 1, 1, toRender.rot * (180.f / (float) Math.PI));
 	}
 
 	public void log(String msg) {
@@ -65,24 +95,32 @@ public class SGF {
 			milisUpdated += 16;
 		}
 
+		normalRenderQueue.clear();
+		uiRenderQueue.clear();
+
+		game.render();
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		uiBatch.begin();
-
-		game.render();
-
+		for (ToRender tr : normalRenderQueue)
+			doDrawImage(tr, true);
 		batch.end();
+
+		uiBatch.begin();
+		for (ToRender tr : uiRenderQueue)
+			doDrawImage(tr, false);
 		uiBatch.end();
 	}
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
-		if (!loadedImages.containsKey(imgName))
-			loadedImages.put(imgName, new Texture(Gdx.files.internal(imgName + ".png")));
+		ToRender tr = new ToRender(x, y, w, h, rot, imgName);
 
-		if (!useCamera)
-			(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot * (180.f / (float) Math.PI));
+		if (useCamera)
+			normalRenderQueue.add(tr);
+		else
+			uiRenderQueue.add(tr);
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
