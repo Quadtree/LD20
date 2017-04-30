@@ -112,7 +112,7 @@ public class SGF implements InputProcessor {
 		}
 
 		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x - w / 2, toRender.y - h / 2, w / 2, h / 2, w, h, 1, 1,
-				toRender.rot * (180.f / (float) Math.PI));
+				toRender.rot * (-180.f / (float) Math.PI));
 	}
 
 	private void doDrawText(QueuedText qt, boolean useCamera) {

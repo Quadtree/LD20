@@ -25,7 +25,7 @@ public class Missile extends PhysicalActor implements ContactListener {
 
 		bd.position.x = x;
 		bd.position.y = y;
-		bd.angle = -angle;
+		bd.angle = angle;
 		bd.type = BodyDef.BodyType.DynamicBody;
 
 		body = Game.s.physicsWorld.createBody(bd);
@@ -100,11 +100,11 @@ public class Missile extends PhysicalActor implements ContactListener {
 
 	@Override
 	public void update() {
-		body.setLinearVelocity(new Vector2((float) Math.cos(-body.getAngle()), (float) Math.sin(-body.getAngle())).scl(7.5f));
+		body.setLinearVelocity(new Vector2((float) Math.cos(body.getAngle()), (float) Math.sin(body.getAngle())).scl(7.5f));
 
-		Vector2 pLeft = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle() - 0.2f), (float) Math.sin(-body.getAngle() - 0.2f)));
-		Vector2 pCenter = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle()), (float) Math.sin(-body.getAngle())));
-		Vector2 pRight = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle() + 0.2f), (float) Math.sin(-body.getAngle() + 0.2f)));
+		Vector2 pLeft = new Vector2(body.getPosition()).add(new Vector2((float) Math.cos(body.getAngle() - 0.2f), (float) Math.sin(body.getAngle() - 0.2f)));
+		Vector2 pCenter = new Vector2(body.getPosition()).add(new Vector2((float) Math.cos(body.getAngle()), (float) Math.sin(body.getAngle())));
+		Vector2 pRight = new Vector2(body.getPosition()).add(new Vector2((float) Math.cos(body.getAngle() + 0.2f), (float) Math.sin(body.getAngle() + 0.2f)));
 
 		float dLeft = pLeft.sub(Game.s.player.getPosition()).len2();
 		float dCenter = pCenter.sub(Game.s.player.getPosition()).len2();

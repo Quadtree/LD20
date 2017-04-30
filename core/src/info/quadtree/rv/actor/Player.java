@@ -16,6 +16,8 @@ import info.quadtree.rv.item.Item;
 
 public class Player extends Robot implements MouseMotionListener, MouseListener, KeyListener {
 
+	public final static boolean GOD_MODE = false;
+
 	public final static int MAX_HP = 10;
 	public final static int MAX_INVENTORY = 68;
 
@@ -276,7 +278,7 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	public void render() {
 		super.render();
 
-		SGF.getInstance().log("" + getPosition());
+		// SGF.getInstance().log("" + getPosition());
 
 		// SGF.getInstance().renderImage("wall", aimPoint.x, aimPoint.y,
 		// getSize(), getSize(), 0, true);
@@ -335,6 +337,9 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 
 		// if(shield < getMaxShield()) shield += 0.01f;
 		shield = Math.min(shield + 0.01f, getMaxShield());
+
+		if (GOD_MODE)
+			hp = MAX_HP;
 
 		super.update();
 	}
