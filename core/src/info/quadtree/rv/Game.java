@@ -1,8 +1,6 @@
 package info.quadtree.rv;
 
-import java.applet.AudioClip;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
@@ -28,8 +26,6 @@ public class Game implements KeyListener, MouseListener, ContactListener, GameIn
 	public static Game s;
 
 	public ArrayList<Actor> actors;
-
-	HashMap<String, AudioClip> audioFiles;
 
 	public boolean dialogUp = false;
 
@@ -91,7 +87,6 @@ public class Game implements KeyListener, MouseListener, ContactListener, GameIn
 	public void init() {
 
 		rand = new Random();
-		audioFiles = new HashMap<String, AudioClip>();
 		actors = new ArrayList<Actor>();
 		// new AABB(new Vector2(0, 0), new Vector2(1024, 1024)), new Vector2(),
 		// true

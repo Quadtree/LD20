@@ -46,6 +46,7 @@ public abstract class Item extends PhysicalActor implements KeyListener, Contact
 
 		FixtureDef fxd = new FixtureDef();
 		fxd.isSensor = true;
+		fxd.shape = cd;
 
 		Filter fd = new Filter();
 		fd.maskBits = 1 << 2;

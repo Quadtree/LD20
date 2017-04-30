@@ -52,7 +52,7 @@ public class SGF {
 			milisUpdated += 16;
 		}
 
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
@@ -71,7 +71,7 @@ public class SGF {
 	}
 
 	public Point2D screenToReal(Point2D pt) {
-		return null;
+		return new Point2D(0, 0);
 	}
 
 	public void setCamera(float x, float y, float zoom) {
