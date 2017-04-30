@@ -1,8 +1,12 @@
 package info.quadtree.rv.actor;
 
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 
 import info.quadtree.rv.Game;
 
@@ -15,47 +19,47 @@ public class AlliedRobot extends Robot implements ContactListener {
 
 		// we're going to make this allied bot static so the player can't push
 		// them around
-		body.destroyShape(body.getShapeList());
+		for (Fixture f : body.getFixtureList())
+			body.destroyFixture(f);
 
 		CircleShape cd = new CircleShape();
 		cd.setRadius(0.4f);
 
-		body.createShape(cd);
-
-		body.setMassFromShapes();
+		body.createFixture(cd, 1);
 
 		Filter fd = new Filter();
 		fd.categoryBits = 1 << 2;
 		fd.maskBits = 0xffffffff;
 
-		body.getShapeList().setFilterData(fd);
+		for (Fixture f : body.getFixtureList())
+			f.setFilterData(fd);
 	}
 
 	@Override
-	public void add(ContactPoint point) {
+	public void beginContact(Contact contact) {
 		if (Game.s.dialogUp)
 			return;
-		Object o1 = point.shape1.getBody().getUserData();
-		Object o2 = point.shape2.getBody().getUserData();
+		Object o1 = contact.getFixtureA().getBody().getUserData();
+		Object o2 = contact.getFixtureB().getBody().getUserData();
 
 		if (o1 instanceof Player || o2 instanceof Player)
 			startConversation();
 	}
 
 	@Override
-	public void persist(ContactPoint point) {
+	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void remove(ContactPoint point) {
+	public void postSolve(Contact contact, ContactImpulse impulse) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void result(ContactResult point) {
+	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub
 
 	}
