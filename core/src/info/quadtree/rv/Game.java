@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.actor.EvilShopkeeperRobot;
 import info.quadtree.rv.actor.Player;
+import info.quadtree.rv.graphics.GameInterface;
 import info.quadtree.rv.graphics.KeyEvent;
 import info.quadtree.rv.graphics.KeyListener;
 import info.quadtree.rv.graphics.MouseEvent;
@@ -22,7 +23,7 @@ import info.quadtree.rv.graphics.MouseListener;
 import info.quadtree.rv.graphics.SGF;
 import info.quadtree.rv.item.Item;
 
-public class Game implements KeyListener, MouseListener, ContactListener {
+public class Game implements KeyListener, MouseListener, ContactListener, GameInterface {
 
 	public static Game s;
 
@@ -86,6 +87,7 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 		return 250 + (itemId / 17 * 38);
 	}
 
+	@Override
 	public void init() {
 
 		rand = new Random();
@@ -236,6 +238,7 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 
 	}
 
+	@Override
 	public void render() {
 		SGF.getInstance().setCamera(player.getPosition().x, player.getPosition().y, 32);
 		for (Actor a : actors)
@@ -347,10 +350,12 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 		}
 	}
 
+	@Override
 	public void shutdown() {
 		// at.keepRun = false;
 	}
 
+	@Override
 	public void update() {
 		if (!inventoryScreen) {
 			physicsWorld.step(1.f / 60.f, 10, 10);
