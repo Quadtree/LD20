@@ -12,7 +12,7 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 
 import info.quadtree.rv.actor.Actor;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Map extends Actor {
 	Body body;

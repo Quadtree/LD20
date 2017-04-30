@@ -1,7 +1,7 @@
 package sgf.demo;
 
 import sgf.GameInterface;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class SGFDemoGame implements GameInterface {
 

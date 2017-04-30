@@ -21,7 +21,7 @@ import info.quadtree.rv.actor.EvilShopkeeperRobot;
 import info.quadtree.rv.actor.Player;
 import info.quadtree.rv.item.Item;
 import sgf.GameInterface;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Game implements GameInterface, KeyListener, MouseListener, ContactListener {
 

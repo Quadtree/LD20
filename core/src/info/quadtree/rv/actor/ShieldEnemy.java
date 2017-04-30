@@ -4,7 +4,7 @@ import org.jbox2d.collision.FilterData;
 import org.jbox2d.collision.shapes.CircleDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.Shield;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class ShieldEnemy extends BasicEnemy {
 

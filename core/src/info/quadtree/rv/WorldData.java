@@ -2,7 +2,7 @@ package info.quadtree.rv;
 
 import java.io.Serializable;
 
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class WorldData implements Serializable {
 	public transient static boolean[] isPassable = { true, true, false, true };

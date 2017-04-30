@@ -4,7 +4,7 @@ import org.jbox2d.collision.shapes.CircleDef;
 import org.jbox2d.dynamics.BodyDef;
 
 import info.quadtree.rv.Game;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class PlotBarrier extends PhysicalActor {
 	public PlotBarrier(float x, float y)

@@ -6,7 +6,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 
 import info.quadtree.rv.actor.PhysicalActor;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Spark extends PhysicalActor {
 

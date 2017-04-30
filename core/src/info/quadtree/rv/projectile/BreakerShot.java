@@ -6,7 +6,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.PhysicalActor;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class BreakerShot extends PhysicalActor {
 	public BreakerShot(float x, float y, float angle)

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import info.quadtree.rv.actor.*;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class NPCDesc implements Serializable {
 

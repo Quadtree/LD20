@@ -4,7 +4,7 @@ import java.util.concurrent.BrokenBarrierException;
 
 import javax.swing.JFrame;
 
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class SGFDemo {
 

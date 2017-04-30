@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import info.quadtree.rv.NPCDesc;
 import info.quadtree.rv.WorldData;
 import sgf.GameInterface;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Editor implements GameInterface, WindowListener, KeyListener, MouseListener, MouseMotionListener {
 

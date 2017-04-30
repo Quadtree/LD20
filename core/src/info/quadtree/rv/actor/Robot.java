@@ -6,7 +6,7 @@ import org.jbox2d.dynamics.BodyDef;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.projectile.Shockbomb;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Robot extends PhysicalActor implements Harmable {
 	Vec2 aimPoint;

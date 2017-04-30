@@ -4,7 +4,7 @@ import java.applet.Applet;
 import java.awt.Image;
 
 import sgf.ImageSource;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 @SuppressWarnings("serial")
 public class RobotVillage extends Applet implements ImageSource {

@@ -2,7 +2,7 @@ package info.quadtree.rve;
 
 import javax.swing.JFrame;
 
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class RobotVillageEditor {
 	public static JFrame mw;

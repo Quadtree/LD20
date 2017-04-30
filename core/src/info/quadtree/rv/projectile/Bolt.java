@@ -11,7 +11,7 @@ import org.jbox2d.dynamics.contacts.ContactResult;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.Harmable;
 import info.quadtree.rv.actor.PhysicalActor;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 import sv.vfx.Spark;
 
 public class Bolt extends PhysicalActor implements ContactListener {

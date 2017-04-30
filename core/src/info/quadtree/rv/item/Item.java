@@ -10,7 +10,7 @@ import org.jbox2d.dynamics.BodyDef;
 import info.quadtree.rv.Game;
 import info.quadtree.rv.actor.PhysicalActor;
 import info.quadtree.rv.actor.Player;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public abstract class Item extends PhysicalActor implements KeyListener{
 	boolean onGround;

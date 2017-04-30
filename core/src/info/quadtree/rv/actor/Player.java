@@ -11,7 +11,7 @@ import org.jbox2d.common.Vec2;
 
 import info.quadtree.rv.Game;
 import info.quadtree.rv.item.Item;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 import sv.vfx.Spark;
 
 public class Player extends Robot implements MouseMotionListener, MouseListener, KeyListener {

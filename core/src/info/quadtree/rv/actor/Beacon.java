@@ -2,7 +2,7 @@ package info.quadtree.rv.actor;
 
 import info.quadtree.rv.Dialog;
 import info.quadtree.rv.Game;
-import sgf.SGF;
+import info.quadtree.rv.graphics.SGF;
 
 public class Beacon extends AlliedRobot {
 

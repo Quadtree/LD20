@@ -1,11 +1,11 @@
 package info.quadtree.rv;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import info.quadtree.rv.actor.Actor;
-import sgf.SGF;
+import info.quadtree.rv.graphics.KeyEvent;
+import info.quadtree.rv.graphics.KeyListener;
+import info.quadtree.rv.graphics.SGF;
 
 public class Dialog extends Actor implements KeyListener {
 	ArrayList<String> messages;
