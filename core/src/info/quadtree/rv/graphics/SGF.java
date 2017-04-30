@@ -1,7 +1,5 @@
 package info.quadtree.rv.graphics;
 
-import java.awt.event.MouseListener;
-
 public class SGF {
 	private static SGF sgf = new SGF();
 
@@ -14,6 +12,10 @@ public class SGF {
 	}
 
 	public void addMouseListener(MouseListener mouseListener) {
+		// @todo: Implment
+	}
+
+	public void addMouseMotionListener(MouseMotionListener mouseListener) {
 		// @todo: Implment
 	}
 

@@ -1,21 +1,36 @@
 package info.quadtree.rv.graphics;
 
-public class MouseEvent {
-	float x, y;
+import com.badlogic.gdx.Input;
 
-	public float getX() {
+public class MouseEvent {
+	public static final int BUTTON1 = Input.Buttons.LEFT;
+	public static final int BUTTON3 = Input.Buttons.RIGHT;
+
+	int button;
+
+	int x, y;
+
+	public int getButton() {
+		return button;
+	}
+
+	public int getX() {
 		return x;
 	}
 
-	public float getY() {
+	public int getY() {
 		return y;
 	}
 
-	public void setX(float x) {
+	public void setButton(int button) {
+		this.button = button;
+	}
+
+	public void setX(int x) {
 		this.x = x;
 	}
 
-	public void setY(float y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
