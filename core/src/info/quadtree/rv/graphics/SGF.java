@@ -201,7 +201,7 @@ public class SGF implements InputProcessor {
 		if (useCamera)
 			textRenderQueue.add(new QueuedText(text, x, y, cr, cg, cb, fontSize));
 		else
-			uiTextRenderQueue.add(new QueuedText(text, x, Gdx.graphics.getHeight() - y, cr, cg, cb, fontSize));
+			uiTextRenderQueue.add(new QueuedText(text, x, Gdx.graphics.getHeight() - (y - fontSize / 2), cr, cg, cb, fontSize));
 	}
 
 	public Point2D screenToReal(Point2D pt) {
