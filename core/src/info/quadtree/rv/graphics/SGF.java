@@ -161,6 +161,8 @@ public class SGF implements InputProcessor {
 			doDrawImage(tr, true);
 		batch.end();
 
+		uiBatch.setProjectionMatrix(new Matrix4().idt().scl(-2.f / Gdx.graphics.getWidth(), -2.f / Gdx.graphics.getHeight(), 1).translate(-Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2, 0));
+
 		uiBatch.begin();
 		for (QueuedImage tr : uiRenderQueue)
 			doDrawImage(tr, false);
