@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 
 public class SGF {
 	private static SGF sgf = new SGF();
@@ -77,7 +78,7 @@ public class SGF {
 		if (!loadedImages.containsKey(imgName))
 			loadedImages.put(imgName, new Texture(Gdx.files.internal(imgName + ".png")));
 
-		batch.draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot);
+		batch.draw(new TextureRegion(loadedImages.get(imgName)), x, y, w / 2, h / 2, w, h, 1, 1, rot * (180.f / (float) Math.PI));
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
@@ -89,7 +90,16 @@ public class SGF {
 	}
 
 	public void setCamera(float x, float y, float zoom) {
+		// System.out.println(x + " " + y + " " + zoom);
 
+		Matrix4 proj = new Matrix4();
+		proj.idt();
+		proj.scl(64);
+		proj.scl(1.f / Gdx.graphics.getWidth(), 1.f / Gdx.graphics.getHeight(), 1);
+		proj.translate(-x, -y, 0);
+		// proj.translate(x, y, 0);
+
+		batch.setProjectionMatrix(proj);
 	}
 
 	public void start(GameInterface game) {
