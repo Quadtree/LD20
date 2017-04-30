@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.reflect.ClassReflection;
 
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.graphics.SGF;
@@ -69,8 +68,6 @@ public class Map extends Actor {
 			 * in = new ObjectInputStream(npcsIn); npcsToCreate =
 			 * (ArrayList<NPCDesc>) in.readObject(); in.close();
 			 */
-
-			ClassReflection.forName("info.quadtree.rv.Dialog");
 
 			Json j = new Json();
 

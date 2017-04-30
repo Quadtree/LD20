@@ -13,7 +13,7 @@ public class PhysicalActor extends Actor {
 	}
 
 	public Vector2 getPosition() {
-		return body.getPosition();
+		return new Vector2(body.getPosition());
 	}
 
 	@Override

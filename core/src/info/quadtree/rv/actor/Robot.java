@@ -34,6 +34,7 @@ public class Robot extends PhysicalActor implements Harmable {
 		bd.position.x = x;
 		bd.position.y = y;
 		bd.fixedRotation = true;
+		bd.type = BodyDef.BodyType.DynamicBody;
 
 		body = Game.s.physicsWorld.createBody(bd);
 
@@ -132,10 +133,15 @@ public class Robot extends PhysicalActor implements Harmable {
 		if (!forward && backward)
 			fb = -1;
 
-		Vector2 force = getMovePoint().sub(body.getPosition());
+		Vector2 force = new Vector2(getMovePoint()).sub(body.getPosition());
+		if (this instanceof Player)
+			SGF.getInstance().log("" + force);
 		force.nor();
 
 		body.applyLinearImpulse(force.scl(fb).scl(getSpeedMod()), new Vector2(), true);
+
+		if (this instanceof Player)
+			SGF.getInstance().log(this + " " + force.toString() + " " + getMovePoint() + " " + fb + " " + getSpeedMod());
 
 		// strafing
 
