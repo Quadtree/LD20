@@ -276,7 +276,8 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	public void render() {
 		super.render();
 
-		SGF.getInstance().renderImage("wall", aimPoint.x, aimPoint.y, getSize(), getSize(), 0, true);
+		// SGF.getInstance().renderImage("wall", aimPoint.x, aimPoint.y,
+		// getSize(), getSize(), 0, true);
 	}
 
 	@Override

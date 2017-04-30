@@ -215,7 +215,7 @@ public class SGF implements InputProcessor {
 		// m4.inv();
 		v3.mul(screenToReal);
 
-		SGF.getInstance().log(pt.x + "," + pt.y + " -> " + v3);
+		// SGF.getInstance().log(pt.x + "," + pt.y + " -> " + v3);
 
 		return new Point2D(v3.x, v3.y);
 	}
@@ -238,7 +238,9 @@ public class SGF implements InputProcessor {
 		screenToReal.idt();
 		// screenToReal.scl(Gdx.graphics.getWidth() / 2,
 		// Gdx.graphics.getHeight() / 2, 1);
+		screenToReal.translate(x, y, 0);
 		screenToReal.scl(1.f / 32.f);
+		screenToReal.translate(-Gdx.graphics.getWidth() / 2, -Gdx.graphics.getHeight() / 2, 0);
 
 		batch.setProjectionMatrix(proj);
 	}
