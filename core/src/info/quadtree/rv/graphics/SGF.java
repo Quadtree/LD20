@@ -29,6 +29,10 @@ public class SGF {
 		// @todo: Implment
 	}
 
+	public void log(String msg) {
+		Gdx.app.log("SGF", msg);
+	}
+
 	public void playAudio(String name) {
 
 	}
@@ -79,6 +83,7 @@ public class SGF {
 	}
 
 	public void start(GameInterface game) {
+		log("Starting up...");
 		this.game = game;
 		batch = new SpriteBatch();
 		milisUpdated = System.currentTimeMillis();

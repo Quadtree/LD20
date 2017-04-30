@@ -2,4 +2,9 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
 <module>
 	<source path="info/quadtree/rv" />
+	<extend-configuration-property name="gdx.reflect.include" value="info.quadtree.rv"/>
+	<extend-configuration-property name="gdx.reflect.include" value="info.quadtree.rv.actor"/>
+	<extend-configuration-property name="gdx.reflect.include" value="info.quadtree.rv.graphics"/>
+	<extend-configuration-property name="gdx.reflect.include" value="info.quadtree.rv.item"/>
+	<extend-configuration-property name="gdx.reflect.include" value="info.quadtree.rv.projectile"/>
 </module>

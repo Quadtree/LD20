@@ -13,6 +13,7 @@ public class RobotVillageGame extends ApplicationAdapter {
 		// batch = new SpriteBatch();
 		// img = new Texture("badlogic.jpg");
 
+		SGF.getInstance().log("Create");
 		SGF.getInstance().start(new Game());
 	}
 
