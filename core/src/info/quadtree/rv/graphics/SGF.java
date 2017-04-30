@@ -122,7 +122,10 @@ public class SGF implements InputProcessor {
 		if (!loadedFonts.containsKey(fontName))
 			loadedFonts.put(fontName, new BitmapFont(Gdx.files.internal(fontName + ".fnt")));
 
-		loadedFonts.get(fontName).draw(useCamera ? batch : uiBatch, qt.text, qt.x, qt.y);
+		SpriteBatch theBatch = useCamera ? batch : uiBatch;
+
+		loadedFonts.get(fontName).setColor(qt.cr / 255.f, qt.cg / 255.f, qt.cb / 255.f, 1);
+		loadedFonts.get(fontName).draw(theBatch, qt.text, qt.x, qt.y);
 	}
 
 	private void doRenderOp(QueuedRenderOp op, boolean useCamera) {
