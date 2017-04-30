@@ -33,7 +33,7 @@ public class Needle extends PhysicalActor implements ContactListener {
 
 		bd.position.x = x;
 		bd.position.y = y;
-		bd.angle = angle;
+		bd.angle = -angle;
 		bd.type = BodyDef.BodyType.DynamicBody;
 
 		body = Game.s.physicsWorld.createBody(bd);

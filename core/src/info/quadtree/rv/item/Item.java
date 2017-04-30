@@ -40,6 +40,7 @@ public abstract class Item extends PhysicalActor implements KeyListener, Contact
 		bd.fixedRotation = true;
 
 		body = Game.s.physicsWorld.createBody(bd);
+		body.setUserData(this);
 
 		CircleShape cd = new CircleShape();
 		cd.setRadius(0.75f);
@@ -63,10 +64,12 @@ public abstract class Item extends PhysicalActor implements KeyListener, Contact
 
 	@Override
 	public void beginContact(Contact contact) {
-		if (contact.getFixtureA().getBody() != body)
+		if (contact.getFixtureA().getBody() == body)
 			this.bodiesInContact.add(contact.getFixtureB().getBody());
-		if (contact.getFixtureB().getBody() != body)
+		if (contact.getFixtureB().getBody() == body)
 			this.bodiesInContact.add(contact.getFixtureA().getBody());
+
+		SGF.getInstance().log("AD " + this.bodiesInContact);
 	}
 
 	public void displayInfo() {
@@ -82,10 +85,12 @@ public abstract class Item extends PhysicalActor implements KeyListener, Contact
 
 	@Override
 	public void endContact(Contact contact) {
-		if (contact.getFixtureA().getBody() != body)
+		if (contact.getFixtureA().getBody() == body)
 			this.bodiesInContact.remove(contact.getFixtureB().getBody());
-		if (contact.getFixtureB().getBody() != body)
+		if (contact.getFixtureB().getBody() == body)
 			this.bodiesInContact.remove(contact.getFixtureA().getBody());
+
+		SGF.getInstance().log("RM " + this.bodiesInContact);
 	}
 
 	public String[] getDescription() {

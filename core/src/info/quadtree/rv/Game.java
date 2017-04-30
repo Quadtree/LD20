@@ -63,6 +63,8 @@ public class Game implements KeyListener, MouseListener, ContactListener, GameIn
 		Object o1 = point.getFixtureA().getBody().getUserData();
 		Object o2 = point.getFixtureB().getBody().getUserData();
 
+		// SGF.getInstance().log(o1 + " " + o2);
+
 		if (o1 != null && o1 instanceof ContactListener)
 			((ContactListener) o1).beginContact(point);
 		if (o2 != null && o2 instanceof ContactListener)
@@ -70,9 +72,16 @@ public class Game implements KeyListener, MouseListener, ContactListener, GameIn
 	}
 
 	@Override
-	public void endContact(Contact contact) {
-		// TODO Auto-generated method stub
+	public void endContact(Contact point) {
+		Object o1 = point.getFixtureA().getBody().getUserData();
+		Object o2 = point.getFixtureB().getBody().getUserData();
 
+		// SGF.getInstance().log(o1 + " " + o2);
+
+		if (o1 != null && o1 instanceof ContactListener)
+			((ContactListener) o1).endContact(point);
+		if (o2 != null && o2 instanceof ContactListener)
+			((ContactListener) o2).endContact(point);
 	}
 
 	float getInvItemX(int itemId) {

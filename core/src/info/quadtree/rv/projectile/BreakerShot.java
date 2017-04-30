@@ -16,7 +16,7 @@ public class BreakerShot extends PhysicalActor {
 
 		bd.position.x = x;
 		bd.position.y = y;
-		bd.angle = angle;
+		bd.angle = -angle;
 		bd.linearDamping = 0.4f;
 		bd.type = BodyDef.BodyType.DynamicBody;
 
