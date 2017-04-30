@@ -1,9 +1,12 @@
 package info.quadtree.rv.graphics;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
 
-public class SGF {
+public class SGF implements InputProcessor {
 	class QueuedImage {
 		String imgName;
 		public float rot;
@@ -57,29 +60,33 @@ public class SGF {
 
 	GameInterface game;
 
+	Set<KeyListener> keyListeners = new HashSet<KeyListener>();
+
 	Map<String, Texture> loadedImages = new HashMap<String, Texture>();
 
 	long milisUpdated = 0;
 
+	Set<MouseListener> mouseListeners = new HashSet<MouseListener>();
+
+	Set<MouseMotionListener> mouseMotionListeners = new HashSet<MouseMotionListener>();
 	Array<QueuedImage> normalRenderQueue = new Array<QueuedImage>();
 
 	Array<QueuedText> textRenderQueue = new Array<QueuedText>();
 
 	SpriteBatch uiBatch;
 	Array<QueuedImage> uiRenderQueue = new Array<QueuedImage>();
-
 	Array<QueuedText> uiTextRenderQueue = new Array<QueuedText>();
 
 	public void addKeyListener(KeyListener keyListener) {
-		// @todo: Implment
+		keyListeners.add(keyListener);
 	}
 
 	public void addMouseListener(MouseListener mouseListener) {
-		// @todo: Implment
+		mouseListeners.add(mouseListener);
 	}
 
 	public void addMouseMotionListener(MouseMotionListener mouseListener) {
-		// @todo: Implment
+		mouseMotionListeners.add(mouseListener);
 	}
 
 	private void doDrawImage(QueuedImage toRender, boolean useCamera) {
@@ -89,8 +96,33 @@ public class SGF {
 		(useCamera ? batch : uiBatch).draw(new TextureRegion(loadedImages.get(toRender.imgName)), toRender.x, toRender.y, toRender.w / 2, toRender.h / 2, toRender.w, toRender.h, 1, 1, toRender.rot * (180.f / (float) Math.PI));
 	}
 
+	@Override
+	public boolean keyDown(int keycode) {
+		for (KeyListener kl : keyListeners)
+			kl.keyPressed(new KeyEvent(keycode));
+		return true;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		for (KeyListener kl : keyListeners)
+			kl.keyReleased(new KeyEvent(keycode));
+		return true;
+	}
+
 	public void log(String msg) {
 		Gdx.app.log("SGF", msg);
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public void playAudio(String name) {
@@ -98,15 +130,15 @@ public class SGF {
 	}
 
 	public void removeKeyListener(KeyListener keyListener) {
-		// @todo: Implment
+		keyListeners.remove(keyListener);
 	}
 
 	public void removeMouseListener(MouseListener mouseListener) {
-		// @todo: Implment
+		mouseListeners.remove(mouseListener);
 	}
 
 	public void removeMouseMotionListener(MouseMotionListener mouseListener) {
-		// @todo: Implment
+		mouseMotionListeners.remove(mouseListener);
 	}
 
 	public void render() {
@@ -157,6 +189,12 @@ public class SGF {
 		return new Point2D(0, 0);
 	}
 
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void setCamera(float x, float y, float zoom) {
 		// System.out.println(x + " " + y + " " + zoom);
 
@@ -176,7 +214,27 @@ public class SGF {
 		uiBatch = new SpriteBatch();
 		milisUpdated = System.currentTimeMillis();
 
+		Gdx.input.setInputProcessor(this);
+
 		game.init();
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public void update() {
