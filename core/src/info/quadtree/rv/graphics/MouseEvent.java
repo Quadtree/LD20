@@ -10,6 +10,13 @@ public class MouseEvent {
 
 	int x, y;
 
+	public MouseEvent(int x, int y, int button) {
+		super();
+		this.button = button;
+		this.x = x;
+		this.y = y;
+	}
+
 	public int getButton() {
 		return button;
 	}

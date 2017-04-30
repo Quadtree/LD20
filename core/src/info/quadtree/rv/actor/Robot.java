@@ -134,14 +134,15 @@ public class Robot extends PhysicalActor implements Harmable {
 			fb = -1;
 
 		Vector2 force = new Vector2(getMovePoint()).sub(body.getPosition());
-		if (this instanceof Player)
-			SGF.getInstance().log("" + force);
+		// if (this instanceof Player)
+		// SGF.getInstance().log("" + force);
 		force.nor();
 
 		body.applyLinearImpulse(force.scl(fb).scl(getSpeedMod()), new Vector2(), true);
 
-		if (this instanceof Player)
-			SGF.getInstance().log(this + " " + force.toString() + " " + getMovePoint() + " " + fb + " " + getSpeedMod());
+		// if (this instanceof Player)
+		// SGF.getInstance().log(this + " " + force.toString() + " " +
+		// getMovePoint() + " " + fb + " " + getSpeedMod());
 
 		// strafing
 

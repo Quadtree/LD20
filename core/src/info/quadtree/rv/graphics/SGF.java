@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 public class SGF implements InputProcessor {
@@ -74,10 +75,12 @@ public class SGF implements InputProcessor {
 
 	Array<QueuedImage> normalRenderQueue = new Array<QueuedImage>();
 
-	Array<QueuedText> textRenderQueue = new Array<QueuedText>();
+	Matrix4 screenToReal = new Matrix4();
 
+	Array<QueuedText> textRenderQueue = new Array<QueuedText>();
 	SpriteBatch uiBatch;
 	Array<QueuedImage> uiRenderQueue = new Array<QueuedImage>();
+
 	Array<QueuedText> uiTextRenderQueue = new Array<QueuedText>();
 
 	public void addKeyListener(KeyListener keyListener) {
@@ -135,8 +138,9 @@ public class SGF implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
+		for (MouseMotionListener mml : mouseMotionListeners)
+			mml.mouseMoved(new MouseEvent(screenX, screenY, 0));
+		return true;
 	}
 
 	public void playAudio(String name) {
@@ -192,20 +196,28 @@ public class SGF implements InputProcessor {
 
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
 		if (useCamera)
-			normalRenderQueue.add(new QueuedImage(x, y, w, h, rot, imgName));
+			normalRenderQueue.add(new QueuedImage(x, -y, w, h, rot, imgName));
 		else
 			uiRenderQueue.add(new QueuedImage(x, Gdx.graphics.getHeight() - y, w, h, rot, imgName));
 	}
 
 	public void renderText(String text, float x, float y, int cr, int cg, int cb, boolean useCamera, int fontSize) {
 		if (useCamera)
-			textRenderQueue.add(new QueuedText(text, x, y, cr, cg, cb, fontSize));
+			textRenderQueue.add(new QueuedText(text, x, -y, cr, cg, cb, fontSize));
 		else
 			uiTextRenderQueue.add(new QueuedText(text, x, Gdx.graphics.getHeight() - (y - fontSize / 2), cr, cg, cb, fontSize));
 	}
 
 	public Point2D screenToReal(Point2D pt) {
-		return new Point2D(0, 0);
+		Vector3 v3 = new Vector3(pt.x, pt.y, 1);
+
+		// Matrix4 m4 = new Matrix4(batch.getProjectionMatrix());
+		// m4.inv();
+		v3.mul(screenToReal);
+
+		SGF.getInstance().log(pt.x + "," + pt.y + " -> " + v3);
+
+		return new Point2D(v3.x, v3.y);
 	}
 
 	@Override
@@ -221,7 +233,12 @@ public class SGF implements InputProcessor {
 		proj.idt();
 		proj.scl(64);
 		proj.scl(1.f / Gdx.graphics.getWidth(), 1.f / Gdx.graphics.getHeight(), 1);
-		proj.translate(-x, -y, 0);
+		proj.translate(-x, y, 0);
+
+		screenToReal.idt();
+		// screenToReal.scl(Gdx.graphics.getWidth() / 2,
+		// Gdx.graphics.getHeight() / 2, 1);
+		screenToReal.scl(1.f / 32.f);
 
 		batch.setProjectionMatrix(proj);
 	}
@@ -240,20 +257,25 @@ public class SGF implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
+		for (MouseListener ml : mouseListeners) {
+			ml.mousePressed(new MouseEvent(screenX, screenY, button));
+		}
+		return true;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
+		for (MouseMotionListener mml : mouseMotionListeners)
+			mml.mouseDragged(new MouseEvent(screenX, screenY, 0));
+		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
+		for (MouseListener ml : mouseListeners) {
+			ml.mouseReleased(new MouseEvent(screenX, screenY, button));
+		}
+		return true;
 	}
 
 	public void update() {

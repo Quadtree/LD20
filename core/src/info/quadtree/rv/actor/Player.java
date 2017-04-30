@@ -273,6 +273,13 @@ public class Player extends Robot implements MouseMotionListener, MouseListener,
 	}
 
 	@Override
+	public void render() {
+		super.render();
+
+		SGF.getInstance().renderImage("wall", aimPoint.x, aimPoint.y, getSize(), getSize(), 0, true);
+	}
+
+	@Override
 	public void reset() {
 		hp = MAX_HP;
 		body.setTransform(new Vector2(502, 545), 0);
