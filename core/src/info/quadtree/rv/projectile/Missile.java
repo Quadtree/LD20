@@ -35,6 +35,7 @@ public class Missile extends PhysicalActor implements ContactListener {
 
 		FixtureDef fxd = new FixtureDef();
 		fxd.density = 1;
+		fxd.shape = pd;
 
 		Filter fd = new Filter();
 		fd.categoryBits = 1 << 7;
@@ -99,11 +100,11 @@ public class Missile extends PhysicalActor implements ContactListener {
 
 	@Override
 	public void update() {
-		body.setLinearVelocity(new Vector2((float) Math.cos(body.getAngle()), (float) Math.sin(body.getAngle())).scl(7.5f));
+		body.setLinearVelocity(new Vector2((float) Math.cos(-body.getAngle()), (float) Math.sin(-body.getAngle())).scl(7.5f));
 
-		Vector2 pLeft = body.getPosition().add(new Vector2((float) Math.cos(body.getAngle() - 0.2f), (float) Math.sin(body.getAngle() - 0.2f)));
-		Vector2 pCenter = body.getPosition().add(new Vector2((float) Math.cos(body.getAngle()), (float) Math.sin(body.getAngle())));
-		Vector2 pRight = body.getPosition().add(new Vector2((float) Math.cos(body.getAngle() + 0.2f), (float) Math.sin(body.getAngle() + 0.2f)));
+		Vector2 pLeft = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle() - 0.2f), (float) Math.sin(-body.getAngle() - 0.2f)));
+		Vector2 pCenter = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle()), (float) Math.sin(-body.getAngle())));
+		Vector2 pRight = body.getPosition().add(new Vector2((float) Math.cos(-body.getAngle() + 0.2f), (float) Math.sin(-body.getAngle() + 0.2f)));
 
 		float dLeft = pLeft.sub(Game.s.player.getPosition()).len2();
 		float dCenter = pCenter.sub(Game.s.player.getPosition()).len2();

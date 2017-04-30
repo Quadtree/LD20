@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -72,16 +73,18 @@ public class SGF implements InputProcessor {
 
 	Map<String, Texture> loadedImages = new HashMap<String, Texture>();
 
-	long milisUpdated = 0;
+	Map<String, Sound> loadedSounds = new HashMap<String, Sound>();
 
+	long milisUpdated = 0;
 	Set<MouseListener> mouseListeners = new HashSet<MouseListener>();
+
 	Set<MouseMotionListener> mouseMotionListeners = new HashSet<MouseMotionListener>();
 
 	Array<QueuedRenderOp> normalRenderQueue = new Array<QueuedRenderOp>();
 
 	Matrix4 screenToReal = new Matrix4();
-
 	SpriteBatch uiBatch;
+
 	Array<QueuedRenderOp> uiRenderQueue = new Array<QueuedRenderOp>();
 
 	public void addKeyListener(KeyListener keyListener) {
@@ -160,7 +163,12 @@ public class SGF implements InputProcessor {
 	}
 
 	public void playAudio(String name) {
+		SGF.getInstance().log("Audio: " + name);
 
+		if (!loadedSounds.containsKey(name))
+			loadedSounds.put(name, Gdx.audio.newSound(Gdx.files.internal(name + ".wav")));
+
+		loadedSounds.get(name).play();
 	}
 
 	public void removeKeyListener(KeyListener keyListener) {

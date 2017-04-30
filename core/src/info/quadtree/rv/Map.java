@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Json;
 
+import info.quadtree.rv.NPCDesc.NPCType;
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.graphics.SGF;
 
@@ -73,6 +74,7 @@ public class Map extends Actor {
 
 			map = j.fromJson(WorldData.class, Gdx.files.internal("world.json"));
 			npcsToCreate = j.fromJson(ArrayList.class, Gdx.files.internal("npcs.json"));
+			npcsToCreate.add(new NPCDesc(NPCType.MissileEnemy, 550, 550));
 
 			BodyDef bd = new BodyDef();
 			body = Game.s.physicsWorld.createBody(bd);
