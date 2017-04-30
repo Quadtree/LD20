@@ -7,7 +7,9 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 
 import info.quadtree.rv.actor.Actor;
@@ -25,8 +27,6 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 	public static Game s;
 
 	public ArrayList<Actor> actors;
-
-	AudioThread at;
 
 	HashMap<String, AudioClip> audioFiles;
 
@@ -61,16 +61,6 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 		s = this;
 	}
 
-	public void add(Contact point) {
-		Object o1 = point.shape1.getBody().getUserData();
-		Object o2 = point.shape2.getBody().getUserData();
-
-		if (o1 != null && o1 instanceof ContactListener)
-			((ContactListener) o1).add(point);
-		if (o2 != null && o2 instanceof ContactListener)
-			((ContactListener) o2).add(point);
-	}
-
 	@Override
 	public void beginContact(Contact point) {
 		Object o1 = point.getFixtureA().getBody().getUserData();
@@ -80,6 +70,12 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 			((ContactListener) o1).beginContact(point);
 		if (o2 != null && o2 instanceof ContactListener)
 			((ContactListener) o2).beginContact(point);
+	}
+
+	@Override
+	public void endContact(Contact contact) {
+		// TODO Auto-generated method stub
+
 	}
 
 	float getInvItemX(int itemId) {
@@ -92,14 +88,11 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 
 	public void init() {
 
-		at = new AudioThread();
-		Thread t = new Thread(at);
-		t.start();
-
 		rand = new Random();
 		audioFiles = new HashMap<String, AudioClip>();
 		actors = new ArrayList<Actor>();
-		// new AABB(new Vector2(0, 0), new Vector2(1024, 1024)), new Vector2(), true
+		// new AABB(new Vector2(0, 0), new Vector2(1024, 1024)), new Vector2(),
+		// true
 		physicsWorld = new World(new Vector2(0, 0), dialogUp);
 		physicsWorld.setContactListener(this);
 		map = new Map();
@@ -221,7 +214,21 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 		// RobotVillage.s.getAudioClip(RobotVillage.s.getDocumentBase(),
 		// "./media/" + name + ".wav").play();
 
-		at.audioNames.add(name);
+		// at.audioNames.add(name);
+
+		SGF.getInstance().playAudio(name);
+	}
+
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void preSolve(Contact contact, Manifold oldManifold) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void remove(Contact point) {
@@ -341,7 +348,7 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 	}
 
 	public void shutdown() {
-		at.keepRun = false;
+		// at.keepRun = false;
 	}
 
 	public void update() {
@@ -364,11 +371,11 @@ public class Game implements KeyListener, MouseListener, ContactListener {
 			dialogUp = dialogTemp;
 		}
 
-		if (!freeItemGiven && player.getPosition().sub(new Vector2(512, 512)).length() > 30) {
+		if (!freeItemGiven && player.getPosition().sub(new Vector2(512, 512)).len() > 30) {
 			for (Actor a : actors) {
 				if (a instanceof EvilShopkeeperRobot) {
 					EvilShopkeeperRobot er = (EvilShopkeeperRobot) a;
-					er.getBody().setXForm(player.getPosition(), 0);
+					er.getBody().setTransform(player.getPosition(), 0);
 				}
 			}
 		}

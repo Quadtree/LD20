@@ -1,9 +1,10 @@
 package info.quadtree.rv;
 
-import com.badlogic.gdx.physics.box2d.collision.FilterData;
-import com.badlogic.gdx.physics.box2d.collision.shapes.CircleDef;
-import com.badlogic.gdx.physics.box2d.common.Vector2;
-import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import info.quadtree.rv.actor.PhysicalActor;
 import info.quadtree.rv.graphics.SGF;
@@ -23,17 +24,18 @@ public class Spark extends PhysicalActor {
 
 		body = Game.s.physicsWorld.createBody(bd);
 
-		CircleDef cd = new CircleDef();
-		cd.radius = 0.1f;
-		cd.density = 1;
+		CircleShape cd = new CircleShape();
+		cd.setRadius(0.1f);
 
-		FilterData fd = new FilterData();
+		FixtureDef fxd = new FixtureDef();
+		fxd.shape = cd;
+		fxd.density = 1;
+
+		Filter fd = new Filter();
 		fd.categoryBits = 1 << 6;
 		fd.maskBits = 1;
 
-		body.createShape(cd).setFilterData(fd);
-
-		body.setMassFromShapes();
+		body.createFixture(fxd).setFilterData(fd);
 
 		body.setUserData(this);
 

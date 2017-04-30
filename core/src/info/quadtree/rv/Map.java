@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.physics.box2d.collision.FilterData;
-import com.badlogic.gdx.physics.box2d.collision.shapes.PolygonDef;
-import com.badlogic.gdx.physics.box2d.common.Vector2;
-import com.badlogic.gdx.physics.box2d.dynamics.Body;
-import com.badlogic.gdx.physics.box2d.dynamics.BodyDef;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import info.quadtree.rv.actor.Actor;
 import info.quadtree.rv.graphics.SGF;
@@ -73,7 +73,7 @@ public class Map extends Actor {
 			BodyDef bd = new BodyDef();
 			body = Game.s.physicsWorld.createBody(bd);
 
-			FilterData fd = new FilterData();
+			Filter fd = new Filter();
 			fd.categoryBits = 1;
 			fd.maskBits = 0xffffffff;
 
@@ -81,7 +81,7 @@ public class Map extends Actor {
 				for (int y = 0; y < map.tiles[0].length; y++) {
 					permutation[x][y] = (byte) Game.s.rand.nextInt(4 * 8);
 					if (!boxFilled[x][y] && !isPassable(x, y) && isPossiblyReachable(x, y)) {
-						PolygonDef pd = new PolygonDef();
+						PolygonShape pd = new PolygonShape();
 
 						int boxHeight = 0;
 
@@ -99,7 +99,7 @@ public class Map extends Actor {
 						// System.out.println(0.5f + " " + 0.5f*boxHeight + " "
 						// + new Vector2(x,y + boxHeight/2.f - 0.5f));
 
-						body.createShape(pd);
+						body.createFixture(pd, 0);
 					}
 				}
 			}
