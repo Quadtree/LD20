@@ -23,6 +23,18 @@ public class SGF {
 
 	}
 
+	public void removeKeyListener(KeyListener keyListener) {
+		// @todo: Implment
+	}
+
+	public void removeMouseListener(MouseListener mouseListener) {
+		// @todo: Implment
+	}
+
+	public void removeMouseMotionListener(MouseMotionListener mouseListener) {
+		// @todo: Implment
+	}
+
 	public void renderImage(String imgName, float x, float y, float w, float h, float rot, boolean useCamera) {
 
 	}
